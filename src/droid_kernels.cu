@@ -20,7 +20,7 @@ typedef Eigen::SparseMatrix<double> SpMat;
 typedef Eigen::Triplet<double> T;
 typedef std::vector<std::vector<long>> graph_t;
 typedef std::vector<torch::Tensor> tensor_list_t;
-
+//ba有关的函数 cuda on gpu 此文件达上千行
 
 
 #define MIN_DEPTH 0.25
@@ -28,7 +28,7 @@ typedef std::vector<torch::Tensor> tensor_list_t;
 #define THREADS 256
 #define NUM_BLOCKS(batch_size) ((batch_size + THREADS - 1) / THREADS)
 
-
+// 宏定义for 循环 简化代码 blockDim：fator graph中要优化的边的数量 循环每条边中对应的两frame之间
 #define GPU_1D_KERNEL_LOOP(k, n) \
   for (size_t k = threadIdx.x; k<n; k += blockDim.x)
 
@@ -55,7 +55,7 @@ __device__ void blockReduce(volatile float *sdata) {
 }
 
 
-__device__ void
+__device__ void //q对X做旋转变换 把四元数转旋转矩阵 再和向量相乘即可 P55
 actSO3(const float *q, const float *X, float *Y) {
   float uv[3];
   uv[0] = 2.0 * (q[1]*X[2] - q[2]*X[1]);
@@ -67,16 +67,16 @@ actSO3(const float *q, const float *X, float *Y) {
   Y[2] = X[2] + q[3]*uv[2] + (q[0]*uv[1] - q[1]*uv[0]);
 }
 
-__device__  void
+__device__  void //transform homogenous point 从i->j X->Y
 actSE3(const float *t, const float *q, const float *X, float *Y) {
-  actSO3(q, X, Y);
+  actSO3(q, X, Y); //先旋转 再平移
   Y[3] = X[3];
   Y[0] += X[3] * t[0];
   Y[1] += X[3] * t[1];
   Y[2] += X[3] * t[2];
 }
 
-__device__ void
+__device__ void //X是一个Jj(1x6) Ji=Jj*Adj()
 adjSE3(const float *t, const float *q, const float *X, float *Y) {
   float qinv[4] = {-q[0], -q[1], -q[2], q[3]};
   actSO3(qinv, &X[0], &Y[0]);
@@ -93,14 +93,14 @@ adjSE3(const float *t, const float *q, const float *X, float *Y) {
   Y[5] += v[2];
 }
 
-__device__ void 
+__device__ void //__device__表示是在gpu中被调用 由绝对位姿得到ji的相对位姿 i->j 代码中(单位)四元数x y z w 推导参考P53 四元数的运算
 relSE3(const float *ti, const float *qi, const float *tj, const float *qj, float *tij, float *qij) {
-  qij[0] = -qj[3] * qi[0] + qj[0] * qi[3] - qj[1] * qi[2] + qj[2] * qi[1],
+  qij[0] = -qj[3] * qi[0] + qj[0] * qi[3] - qj[1] * qi[2] + qj[2] * qi[1],//先得到相对旋转的四元数 前提是单位四元数
   qij[1] = -qj[3] * qi[1] + qj[1] * qi[3] - qj[2] * qi[0] + qj[0] * qi[2],
   qij[2] = -qj[3] * qi[2] + qj[2] * qi[3] - qj[0] * qi[1] + qj[1] * qi[0],
   qij[3] =  qj[3] * qi[3] + qj[0] * qi[0] + qj[1] * qi[1] + qj[2] * qi[2],
 
-  actSO3(qij, ti, tij);
+  actSO3(qij, ti, tij);//把ti转到j坐标系下
   tij[0] = tj[0] - tij[0];
   tij[1] = tj[1] - tij[1];
   tij[2] = tj[2] - tij[2];
@@ -173,39 +173,40 @@ expSE3(const float *xi, float* t, float* q) {
     t[2] += b * tau[2];
   }
 }
+//ba_cuda 调用
 __global__ void projective_transform_kernel(
-    const torch::PackedTensorAccessor32<float,4,torch::RestrictPtrTraits> target,
-    const torch::PackedTensorAccessor32<float,4,torch::RestrictPtrTraits> weight,
-    const torch::PackedTensorAccessor32<float,2,torch::RestrictPtrTraits> poses,
-    const torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> disps,
-    const torch::PackedTensorAccessor32<float,1,torch::RestrictPtrTraits> intrinsics,
-    const torch::PackedTensorAccessor32<long,1,torch::RestrictPtrTraits> ii,
-    const torch::PackedTensorAccessor32<long,1,torch::RestrictPtrTraits> jj,
-    torch::PackedTensorAccessor32<float,4,torch::RestrictPtrTraits> Hs,
-    torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> vs,
-    torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> Eii,
-    torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> Eij,
-    torch::PackedTensorAccessor32<float,2,torch::RestrictPtrTraits> Cii,
-    torch::PackedTensorAccessor32<float,2,torch::RestrictPtrTraits> bz)
+    const torch::PackedTensorAccessor32<float,4,torch::RestrictPtrTraits> target,//(#e,2,48,64)
+    const torch::PackedTensorAccessor32<float,4,torch::RestrictPtrTraits> weight,//(#e,2,48,64)
+    const torch::PackedTensorAccessor32<float,2,torch::RestrictPtrTraits> poses,//(buffer=1000,7)
+    const torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> disps,//(,48,64)初始1
+    const torch::PackedTensorAccessor32<float,1,torch::RestrictPtrTraits> intrinsics,//(4)
+    const torch::PackedTensorAccessor32<long,1,torch::RestrictPtrTraits> ii,// #edge
+    const torch::PackedTensorAccessor32<long,1,torch::RestrictPtrTraits> jj,  //下面的变量的含义 作为输出
+    torch::PackedTensorAccessor32<float,4,torch::RestrictPtrTraits> Hs,//(4,#e,6,6)
+    torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> vs,//(2,#e,6)
+    torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> Eii,//(#e,6,48x64=3072)
+    torch::PackedTensorAccessor32<float,3,torch::RestrictPtrTraits> Eij,//(#e,6,48x64=3072)
+    torch::PackedTensorAccessor32<float,2,torch::RestrictPtrTraits> Cii,//(#e,48x64=3072)
+    torch::PackedTensorAccessor32<float,2,torch::RestrictPtrTraits> bz)//(#e,48x64=3072)
 {
-  const int block_id = blockIdx.x;
+  const int block_id = blockIdx.x;//grid: #e  每个threadblock 256个线程
   const int thread_id = threadIdx.x;
 
-  const int ht = disps.size(1);
+  const int ht = disps.size(1);//48,64
   const int wd = disps.size(2);
 
-  int ix = static_cast<int>(ii[block_id]);
+  int ix = static_cast<int>(ii[block_id]); //block_id 就是代表某个边 取出的是顶点
   int jx = static_cast<int>(jj[block_id]);
-
+  //内参 “__shared__”共享内存中的变量 可被该线程块内所有线程访问！
   __shared__ float fx;
   __shared__ float fy;
   __shared__ float cx;
   __shared__ float cy;
-
+  //数组 含义? 存储位姿
   __shared__ float ti[3], tj[3], tij[3];
   __shared__ float qi[4], qj[4], qij[4];
 
-  // load intrinsics from global memory
+  // load intrinsics from global memory 到share memory
   if (thread_id == 0) {
     fx = intrinsics[0];
     fy = intrinsics[1];
@@ -213,12 +214,12 @@ __global__ void projective_transform_kernel(
     cy = intrinsics[3];
   }
 
-  __syncthreads();
+  __syncthreads();//线程同步机制:确保线程块中的每个线程都执行完 __syncthreads()前面的语句后，才会执行下一条语句
 
   // stereo frames
-  if (ix == jx) {
+  if (ix == jx) {//按照论文，双目情况就在同顶点 左目与双目建立边
     if (thread_id == 0) {
-      tij[0] =  -0.1;
+      tij[0] =  -0.1; //表示双目之间的位姿 理应就相差x方向的平移
       tij[1] =     0;
       tij[2] =     0;
       qij[0] =     0;
@@ -228,120 +229,121 @@ __global__ void projective_transform_kernel(
     }
   }
 
-  else {
+  else {//单目的情况
 
     // load poses from global memory
-    if (thread_id < 3) {
+    if (thread_id < 3) { //平移部分 
       ti[thread_id] = poses[ix][thread_id];
       tj[thread_id] = poses[jx][thread_id];
     }
 
-    if (thread_id < 4) {
+    if (thread_id < 4) { //后4为旋转的四元数 x y z w
       qi[thread_id] = poses[ix][thread_id+3];
       qj[thread_id] = poses[jx][thread_id+3];
     }
 
     __syncthreads();
 
-    if (thread_id == 0) {
+    if (thread_id == 0) {//得到i->j的相对位姿
       relSE3(ti, qi, tj, qj, tij, qij);
     }
   }
 
   __syncthreads();
 
-  //points 
+  //points 4d 齐次坐标
   float Xi[4];
   float Xj[4];
 
   // jacobians
-  float Jx[12];
-  float Jz;
+  float Jx[12]; //对两个顶点位姿
+  float Jz; //对逆深度
 
   float* Ji = &Jx[0];
   float* Jj = &Jx[6];
 
-  // hessians
+  // hessians 这里的12？ 98
   float hij[12*(12+1)/2];
 
   float vi[6], vj[6];
 
   int l;
   for (l=0; l<12*(12+1)/2; l++) {
-    hij[l] = 0;
+    hij[l] = 0;//初始为0
   }
 
-  for (int n=0; n<6; n++) {
+  for (int n=0; n<6; n++) {//初始为0
     vi[n] = 0;
     vj[n] = 0;
   }
 
   __syncthreads();
-
+  //k = threadIdx.x; k<48x64=3072; k += blockDim.x(:256)  3072=12*256 所以循环12次
   GPU_1D_KERNEL_LOOP(k, ht*wd) {
 
-    const int i = k / wd;
-    const int j = k % wd;
-
+    const int i = k / wd; //整数部分 表示一个图的经过的行数
+    const int j = k % wd; //取余 表示一个图的第i行上的第j列
+    //于是就得到的像素坐标 所以12个block就能覆盖一条边 两帧的所有坐标对应  那为啥不申请 12x#edge大小的grid 现在这样不会冲突吗
     const float u = static_cast<float>(j);
     const float v = static_cast<float>(i);
     
-    // homogenous coordinates
-    Xi[0] = (u - cx) / fx;
+    // homogenous coordinates 逆向相机模型 得到齐次坐标
+    Xi[0] = (u - cx) / fx;//归一化平面上的
     Xi[1] = (v - cy) / fy;
     Xi[2] = 1;
-    Xi[3] = disps[ix][i][j];
+    Xi[3] = disps[ix][i][j]; //按顶点取出该帧的逆深度
 
-    // transform homogenous point
+    // transform homogenous point 从i->j
     actSE3(tij, qij, Xi, Xj);
 
-    const float x = Xj[0];
+    const float x = Xj[0];//
     const float y = Xj[1];
-    const float h = Xj[3];
-
+    const float h = Xj[3];// i坐标系下的深度
+    //和0.25比较  为何要倒数  用于后面的投影 无需对第4维提前归一
     const float d = (Xj[2] < MIN_DEPTH) ? 0.0 : 1.0 / Xj[2];
     const float d2 = d * d;
-
+    //那关权重是2通道 这里 俩坐标各一个权值
     float wu = (Xj[2] < MIN_DEPTH) ? 0.0 : .001 * weight[block_id][0][i][j];
     float wv = (Xj[2] < MIN_DEPTH) ? 0.0 : .001 * weight[block_id][1][i][j];
-    const float ru = target[block_id][0][i][j] - (fx * d * x + cx);
-    const float rv = target[block_id][1][i][j] - (fy * d * y + cy);
-
-    // x - coordinate
-
+    const float ru = target[block_id][0][i][j] - (fx * d * x + cx);//target是经过gru修正后的坐标 这里减去投影对应 得到的是gru的delta?
+    const float rv = target[block_id][1][i][j] - (fy * d * y + cy);//为啥要把这个变化量拿出来 这个就是重投影误差中的error!!
+    //！！新发现 所以每次ba优化的loss就是convgru得到的delta，这个delta对位姿和深度的雅可比
+    // x - coordinate 
+    // p'对位姿j的雅可比矩阵(2x6)中的 第一行 (1x6) 是对x轴的雅可比
     Jj[0] = fx * (h*d);
     Jj[1] = fx * 0;
     Jj[2] = fx * (-x*h*d2);
     Jj[3] = fx * (-x*y*d2);
     Jj[4] = fx * (1 + x*x*d2);
     Jj[5] = fx * (-y*d);
-
+    // p'对逆深度的雅可比矩阵(2x1) 的第一行(1x1)
     Jz = fx * (tij[0] * d - tij[2] * (x * d2));
-    Cii[block_id][k] = wu * Jz * Jz;
-    bz[block_id][k] = wu * ru * Jz;
+    // 正规方程的构建 ? 复习十四讲
+    Cii[block_id][k] = wu * Jz * Jz; //Cii(#e,48x64=3072)
+    bz[block_id][k] = wu * ru * Jz;//这两个式子还待搞懂  g中和深度有关的分量？
 
-    if (ix == jx) wu = 0;
-
+    if (ix == jx) wu = 0; //双目的情况
+    // 继续得到p'对位姿i的雅可比矩阵(2x6)的首行 因为 Ji和Jj 其实就差了负号 和 adj(Gji)
     adjSE3(tij, qij, Jj, Ji);
-    for (int n=0; n<6; n++) Ji[n] *= -1;
+    for (int n=0; n<6; n++) Ji[n] *= -1; //加上负号
 
     l=0;
     for (int n=0; n<12; n++) {
-      for (int m=0; m<=n; m++) {
+      for (int m=0; m<=n; m++) { //感觉和hessi矩阵有关 等价于矩阵乘法吧
         hij[l] += wu * Jx[n] * Jx[m];
         l++;
       }
     }
-
+    //v是g中和位姿有关的分量吧
     for (int n=0; n<6; n++) {
       vi[n] += wu * ru * Ji[n];
       vj[n] += wu * ru * Jj[n];
-
+      //像是H中那两个E
       Eii[block_id][n][k] = wu * Jz * Ji[n];
       Eij[block_id][n][k] = wu * Jz * Jj[n];
     }
-
-
+    // y - coordinate 同上 u变为v
+    //
     Jj[0] = fy * 0;
     Jj[1] = fy * (h*d);
     Jj[2] = fy * (-y*h*d2);
@@ -350,8 +352,8 @@ __global__ void projective_transform_kernel(
     Jj[5] = fy * (x*d);
 
     Jz = fy * (tij[1] * d - tij[2] * (y * d2));
-    Cii[block_id][k] += wv * Jz * Jz;
-    bz[block_id][k] += wv * rv * Jz;
+    Cii[block_id][k] += wv * Jz * Jz; //是输出
+    bz[block_id][k] += wv * rv * Jz; //是输出
 
     if (ix == jx) wv = 0;
 
@@ -379,12 +381,12 @@ __global__ void projective_transform_kernel(
 
   __syncthreads();
 
-  __shared__ float sdata[THREADS];
+  __shared__ float sdata[THREADS]; //256
   for (int n=0; n<6; n++) {
     sdata[threadIdx.x] = vi[n];
     blockReduce(sdata);
     if (threadIdx.x == 0) {
-      vs[0][block_id][n] = sdata[0];
+      vs[0][block_id][n] = sdata[0]; //是输出
     }
 
     __syncthreads();
@@ -403,7 +405,7 @@ __global__ void projective_transform_kernel(
       sdata[threadIdx.x] = hij[l];
       blockReduce(sdata);
 
-      if (threadIdx.x == 0) {
+      if (threadIdx.x == 0) { //Hs是输出
         if (n<6 && m<6) {
           Hs[0][block_id][n][m] = sdata[0];
           Hs[0][block_id][m][n] = sdata[0];
@@ -1310,52 +1312,52 @@ SparseBlock schur_block(torch::Tensor E,
   return A;
 }
 
-
+// ba 写在这里 100多行
 std::vector<torch::Tensor> ba_cuda(
-    torch::Tensor poses,
-    torch::Tensor disps,
-    torch::Tensor intrinsics,
-    torch::Tensor disps_sens,
-    torch::Tensor targets,
-    torch::Tensor weights,
-    torch::Tensor eta,
-    torch::Tensor ii,
-    torch::Tensor jj,
-    const int t0,
-    const int t1,
-    const int iterations,
-    const float lm,
-    const float ep,
-    const bool motion_only)
+    torch::Tensor poses,//(buffer=1000,7)
+    torch::Tensor disps,//(,48,64)初始1
+    torch::Tensor intrinsics,//(4)
+    torch::Tensor disps_sens,//(,48,64)
+    torch::Tensor targets,//(#e,2,48,64)
+    torch::Tensor weights,//(#e,2,48,64)
+    torch::Tensor eta,//damp (#v=12，48，64)
+    torch::Tensor ii,// #edge
+    torch::Tensor jj,// #edge
+    const int t0,// 初始1
+    const int t1,// 初始12 (warm up)
+    const int iterations,//ba迭代次数 默认2
+    const float lm,//1e-4
+    const float ep,//0.1
+    const bool motion_only)//是否只优化位姿 默认false
 {
   auto opts = poses.options();
-  const int num = ii.size(0);
-  const int ht = disps.size(1);
-  const int wd = disps.size(2);
+  const int num = ii.size(0); //当前graph边的数目 也就是误差项数
+  const int ht = disps.size(1); //48
+  const int wd = disps.size(2); //64
 
-  torch::Tensor ts = torch::arange(t0, t1).to(torch::kCUDA);
-  torch::Tensor ii_exp = torch::cat({ts, ii}, 0);
+  torch::Tensor ts = torch::arange(t0, t1).to(torch::kCUDA);//前闭后开 1~11
+  torch::Tensor ii_exp = torch::cat({ts, ii}, 0);//再边之前增加ts why? (71)
   torch::Tensor jj_exp = torch::cat({ts, jj}, 0);
 
-  std::tuple<torch::Tensor, torch::Tensor> kuniq = 
+  std::tuple<torch::Tensor, torch::Tensor> kuniq =  //kuniq[0] 是无重复索引 [0,11] kuniq[1] 升序排列
     torch::_unique(ii_exp, true, true);
 
-  torch::Tensor kx = std::get<0>(kuniq);
-  torch::Tensor kk_exp = std::get<1>(kuniq);
+  torch::Tensor kx = std::get<0>(kuniq);//kuniq[0] 是无重复索引
+  torch::Tensor kk_exp = std::get<1>(kuniq);//kuniq[1] 升序排列
     
   torch::Tensor dx;
   torch::Tensor dz;
 
-  // initialize buffers
+  // initialize buffers 这里6指什么？ 这些量的含义
   torch::Tensor Hs = torch::zeros({4, num, 6, 6}, opts);
   torch::Tensor vs = torch::zeros({2, num, 6}, opts);
   torch::Tensor Eii = torch::zeros({num, 6, ht*wd}, opts);
   torch::Tensor Eij = torch::zeros({num, 6, ht*wd}, opts);
   torch::Tensor Cii = torch::zeros({num, ht*wd}, opts);
   torch::Tensor wi = torch::zeros({num, ht*wd}, opts);
-
+  //多次BA优化
   for (int itr=0; itr<iterations; itr++) {
-
+    //每条边使用一个线程块 每个线程块 THREADS=256个线程
     projective_transform_kernel<<<num, THREADS>>>(
       targets.packed_accessor32<float,4,torch::RestrictPtrTraits>(),
       weights.packed_accessor32<float,4,torch::RestrictPtrTraits>(),
@@ -1369,7 +1371,7 @@ std::vector<torch::Tensor> ba_cuda(
       Eii.packed_accessor32<float,3,torch::RestrictPtrTraits>(),
       Eij.packed_accessor32<float,3,torch::RestrictPtrTraits>(),
       Cii.packed_accessor32<float,2,torch::RestrictPtrTraits>(),
-      wi.packed_accessor32<float,2,torch::RestrictPtrTraits>());
+      wi.packed_accessor32<float,2,torch::RestrictPtrTraits>()); //计算了误差项 雅可比 正规方程中的量
 
 
     // pose x pose block
@@ -1392,7 +1394,7 @@ std::vector<torch::Tensor> ba_cuda(
     }
     
     else {
-      // add depth residual if there are depth sensor measurements
+      // add depth residual if there are depth sensor measurements 破案了 disps_sens是rgb-d模式下 输入的深度
       const float alpha = 0.05;
       torch::Tensor m = (disps_sens.index({kx, "..."}) > 0).to(torch::TensorOptions().dtype(torch::kFloat32)).view({-1, ht*wd});
       torch::Tensor C = accum_cuda(Cii, ii, kx) + m * alpha + (1 - m) * eta.view({-1, ht*wd});

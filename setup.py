@@ -1,9 +1,9 @@
 from setuptools import setup
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
-
+# -*- coding:utf8 -*-
 import os.path as osp
 ROOT = osp.dirname(osp.abspath(__file__))
-
+# 利用python提供的setuptools来编译并加载C++代码
 setup(
     name='droid_backends',
     ext_modules=[
@@ -11,7 +11,7 @@ setup(
             include_dirs=[osp.join(ROOT, 'thirdparty/eigen')],
             sources=[
                 'src/droid.cpp', 
-                'src/droid_kernels.cu',
+                'src/droid_kernels.cu', # .cu cuda c++ 编程
                 'src/correlation_kernels.cu',
                 'src/altcorr_kernel.cu',
             ],

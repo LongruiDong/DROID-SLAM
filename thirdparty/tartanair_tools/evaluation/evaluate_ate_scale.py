@@ -38,7 +38,7 @@
 #
 # Requirements: 
 # sudo apt-get install python-argparse
-
+# -*- coding:utf8 -*-
 """
 This script computes the absolute trajectory error from the ground truth
 trajectory and the estimated trajectory.

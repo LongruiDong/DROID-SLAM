@@ -38,3 +38,25 @@ class DroidBackend:
         graph.update_lowmem(steps=steps)
         graph.clear_edges()
         self.video.dirty[:t] = True
+        
+        # return selfii, selfjj, weight, upmask
+    
+    @torch.no_grad()
+    def onlyvis(self, steps=1):
+        """ test vis """
+
+        t = self.video.counter.value
+        if not self.video.stereo and not torch.any(self.video.disps_sens):
+             self.video.normalize()
+
+        graph = FactorGraph(self.video, self.update_op, corr_impl="alt", max_factors=16*t)
+
+        graph.add_proximity_factors(rad=self.backend_radius, 
+                                    nms=self.backend_nms, 
+                                    thresh=self.backend_thresh, 
+                                    beta=self.beta)
+
+        graph.vis_lowmem() #测试
+        graph.clear_edges()
+        self.video.dirty[:t] = True
+

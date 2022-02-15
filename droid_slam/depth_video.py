@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import lietorch
 import droid_backends
-
+# -*- coding:utf8 -*-
 from torch.multiprocessing import Process, Queue, Lock, Value
 from collections import OrderedDict
 
@@ -12,21 +12,21 @@ import geom.projective_ops as pops
 class DepthVideo:
     def __init__(self, image_size=[480, 640], buffer=1024, stereo=False, device="cuda:0"):
                 
-        # current keyframe count
+        # current keyframe count #哦 看来就是通过Motionfilter 加入depthvideo的就是kf？还不是
         self.counter = Value('i', 0)
         self.ready = Value('i', 0)
-        self.ht = ht = image_size[0]
+        self.ht = ht = image_size[0] #原始大小！
         self.wd = wd = image_size[1]
 
         ### state attributes ###
         self.tstamp = torch.zeros(buffer, device="cuda", dtype=torch.float).share_memory_()
         self.images = torch.zeros(buffer, 3, ht, wd, device="cuda", dtype=torch.uint8)
-        self.dirty = torch.zeros(buffer, device="cuda", dtype=torch.bool).share_memory_()
-        self.red = torch.zeros(buffer, device="cuda", dtype=torch.bool).share_memory_()
+        self.dirty = torch.zeros(buffer, device="cuda", dtype=torch.bool).share_memory_()#?
+        self.red = torch.zeros(buffer, device="cuda", dtype=torch.bool).share_memory_()#?
         self.poses = torch.zeros(buffer, 7, device="cuda", dtype=torch.float).share_memory_()
-        self.disps = torch.ones(buffer, ht//8, wd//8, device="cuda", dtype=torch.float).share_memory_()
-        self.disps_sens = torch.zeros(buffer, ht//8, wd//8, device="cuda", dtype=torch.float).share_memory_()
-        self.disps_up = torch.zeros(buffer, ht, wd, device="cuda", dtype=torch.float).share_memory_()
+        self.disps = torch.ones(buffer, ht//8, wd//8, device="cuda", dtype=torch.float).share_memory_()# 视差？深度倒数吧  初始为1
+        self.disps_sens = torch.zeros(buffer, ht//8, wd//8, device="cuda", dtype=torch.float).share_memory_()# ? 初始0
+        self.disps_up = torch.zeros(buffer, ht, wd, device="cuda", dtype=torch.float).share_memory_()# 上采样到原图大小的视差
         self.intrinsics = torch.zeros(buffer, 4, device="cuda", dtype=torch.float).share_memory_()
 
         self.stereo = stereo
@@ -43,7 +43,7 @@ class DepthVideo:
     def get_lock(self):
         return self.counter.get_lock()
 
-    def __item_setter(self, index, item):
+    def __item_setter(self, index, item): #item: tstep, im(3,384,512), pose I, ? 1.0, depth, intrinsics / 8.0, gmap(1,128,48,64),net[0,0](48,64), inp[0,0]  
         if isinstance(index, int) and index >= self.counter.value:
             self.counter.value = index + 1
         
@@ -52,12 +52,12 @@ class DepthVideo:
 
         # self.dirty[index] = True
         self.tstamp[index] = item[0]
-        self.images[index] = item[1]
+        self.images[index] = item[1] 
 
         if item[2] is not None:
             self.poses[index] = item[2]
 
-        if item[3] is not None:
+        if item[3] is not None: #(.,48,64) 首帧时 都为1
             self.disps[index] = item[3]
 
         if item[4] is not None:
@@ -70,7 +70,7 @@ class DepthVideo:
         if len(item) > 6:
             self.fmaps[index] = item[6]
 
-        if len(item) > 7:
+        if len(item) > 7: #(48,64) 赋给 (128,48,64) 各通道都一样 这只是首帧 其余 维度一样 3维
             self.nets[index] = item[7]
 
         if len(item) > 8:
@@ -114,7 +114,7 @@ class DepthVideo:
 
         if not isinstance(jj, torch.Tensor):
             jj = torch.as_tensor(jj)
-
+        # 'cuda' 和 'cuda:0' 有区别吗
         ii = ii.to(device="cuda", dtype=torch.long).reshape(-1)
         jj = jj.to(device="cuda", dtype=torch.long).reshape(-1)
 
@@ -139,11 +139,11 @@ class DepthVideo:
     def reproject(self, ii, jj):
         """ project points from ii -> jj """
         ii, jj = DepthVideo.format_indicies(ii, jj)
-        Gs = lietorch.SE3(self.poses[None])
+        Gs = lietorch.SE3(self.poses[None]) #(1000,7)->(1,1000,7)-> (1,1000,6) 此时都是I
 
         coords, valid_mask = \
-            pops.projective_transform(Gs, self.disps[None], self.intrinsics[None], ii, jj)
-
+            pops.projective_transform(Gs, self.disps[None], self.intrinsics[None], ii, jj) #(1,1000,48,64) (1,1000,4)
+        # --(1,60,48,64,2),(1,60,48,64,1) 排除距离相机太近的
         return coords, valid_mask
 
     def distance(self, ii=None, jj=None, beta=0.3, bidirectional=True):
@@ -179,15 +179,14 @@ class DepthVideo:
         return d
 
     def ba(self, target, weight, eta, ii, jj, t0=1, t1=None, itrs=2, lm=1e-4, ep=0.1, motion_only=False):
-        """ dense bundle adjustment (DBA) """
-
-        with self.get_lock():
-
+        """ dense bundle adjustment (DBA) """ #核心在这！
+        ##(#e,2,48,64) (#v=12，48，64)
+        with self.get_lock(): #和multipr 是说固定首帧0吧 [1,12] 下标加1了？
             # [t0, t1] window of bundle adjustment optimization
             if t1 is None:
                 t1 = max(ii.max().item(), jj.max().item()) + 1
-
+            # cuda 扩展！ (buffer=1000,7) (,48,64)初始1 (4) (,48,64), (#e,2,48,64)(#e,2,48,64) (#v=12，48，64)
             droid_backends.ba(self.poses, self.disps, self.intrinsics[0], self.disps_sens,
                 target, weight, eta, ii, jj, t0, t1, itrs, lm, ep, motion_only)
 
-            self.disps.clamp_(min=0.001)
+            self.disps.clamp_(min=0.001) #元素值域限制 即深度值小于1000

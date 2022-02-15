@@ -1,16 +1,16 @@
 import torch
 import torch.nn.functional as F
-
+# -*- coding:utf8 -*-
 import droid_backends
 
-class CorrSampler(torch.autograd.Function):
+class CorrSampler(torch.autograd.Function): #https://blog.csdn.net/tsq292978891/article/details/79364140
 
-    @staticmethod
+    @staticmethod #某层的4d corr volume
     def forward(ctx, volume, coords, radius):
-        ctx.save_for_backward(volume,coords)
-        ctx.radius = radius
-        corr, = droid_backends.corr_index_forward(volume, coords, radius)
-        return corr
+        ctx.save_for_backward(volume,coords) #(#1,48,64,48/2^i,64/2^i) (#1,2,48,64)
+        ctx.radius = radius # 3
+        corr, = droid_backends.corr_index_forward(volume, coords, radius) #没找到子函数 似乎在.cu中
+        return corr #(#1,7,7,48,64)
 
     @staticmethod
     def backward(ctx, grad_output):
@@ -21,33 +21,33 @@ class CorrSampler(torch.autograd.Function):
 
 
 class CorrBlock:
-    def __init__(self, fmap1, fmap2, num_levels=4, radius=3):
-        self.num_levels = num_levels
+    def __init__(self, fmap1, fmap2, num_levels=4, radius=3): #构建4层 对应关系金字塔corr_pyramid 1是kf 2是input frame
+        self.num_levels = num_levels #corr volume 4 层金字塔
         self.radius = radius
         self.corr_pyramid = []
 
-        # all pairs correlation
+        # all pairs correlation fmap(1,1,128,48,64)全连接 内积相似性 (1,1,48,64,48,64) 4d volume
         corr = CorrBlock.corr(fmap1, fmap2)
 
-        batch, num, h1, w1, h2, w2 = corr.shape
-        corr = corr.reshape(batch*num*h1*w1, 1, h2, w2)
-        
+        batch, num, h1, w1, h2, w2 = corr.shape # 1,60,48,64,48,64
+        corr = corr.reshape(batch*num*h1*w1, 1, h2, w2) #(3072xnum,1,48,64) 为了适用池化 N C h w
+        #paper 构建最初 Correlation Pyramid 见RAFT
         for i in range(self.num_levels):
             self.corr_pyramid.append(
-                corr.view(batch*num, h1, w1, h2//2**i, w2//2**i))
-            corr = F.avg_pool2d(corr, 2, stride=2)
-            
-    def __call__(self, coords):
-        out_pyramid = []
-        batch, num, ht, wd, _ = coords.shape
-        coords = coords.permute(0,1,4,2,3)
-        coords = coords.contiguous().view(batch*num, 2, ht, wd)
-        
-        for i in range(self.num_levels):
-            corr = CorrSampler.apply(self.corr_pyramid[i], coords/2**i, self.radius)
-            out_pyramid.append(corr.view(batch, num, -1, ht, wd))
+                corr.view(batch*num, h1, w1, h2//2**i, w2//2**i)) #(1,48,64,48/2^i,64/2^i) --> (1,48,64,6,8)
+            corr = F.avg_pool2d(corr, 2, stride=2) # 每个level Kernel 2*2 池化 每次h/2,w/2 再view 保证元素数一致
+    # LOOK UP index correlattion volume         
+    def __call__(self, coords): #coords 坐标网格(1,1#,48,64,2)
+        out_pyramid = [] #len 4 (1,1,49,48,64)
+        batch, num, ht, wd, _ = coords.shape #(1,#edge,48,64,2)
+        coords = coords.permute(0,1,4,2,3) #维度换位 (1,#,2,48,64)
+        coords = coords.contiguous().view(batch*num, 2, ht, wd) #(1x#,2,48,64)
+        # 对Correlation Pyramid 处理 LOOK UP? # apply 实际进入CorrSampler.forward
+        for i in range(self.num_levels): 
+            corr = CorrSampler.apply(self.corr_pyramid[i], coords/2**i, self.radius)#(1,7,7,48/2^i,64/2^i)
+            out_pyramid.append(corr.view(batch, num, -1, ht, wd)) #(1,7,7,48,64)(1,#edge,49,48,64)
 
-        return torch.cat(out_pyramid, dim=2)
+        return torch.cat(out_pyramid, dim=2) #在指定维度拼接 (1,#edge,4*49,48,64)
 
     def cat(self, other):
         for i in range(self.num_levels):
@@ -61,13 +61,13 @@ class CorrBlock:
 
 
     @staticmethod
-    def corr(fmap1, fmap2):
+    def corr(fmap1, fmap2):#(1,1,128,48,64)
         """ all-pairs correlation """
-        batch, num, dim, ht, wd = fmap1.shape
-        fmap1 = fmap1.reshape(batch*num, dim, ht*wd) / 4.0
+        batch, num, dim, ht, wd = fmap1.shape #num可能>1
+        fmap1 = fmap1.reshape(batch*num, dim, ht*wd) / 4.0 #(n,128,3072) why divide 4
         fmap2 = fmap2.reshape(batch*num, dim, ht*wd) / 4.0
         
-        corr = torch.matmul(fmap1.transpose(1,2), fmap2)
+        corr = torch.matmul(fmap1.transpose(1,2), fmap2) #(n,3072,128) * (n,128,3072) = (1,3072,3072) 实际就是每个位置两128d特征向量内积
         return corr.view(batch, num, ht, wd, ht, wd)
 
 

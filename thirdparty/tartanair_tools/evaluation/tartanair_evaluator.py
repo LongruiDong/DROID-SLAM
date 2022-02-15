@@ -1,6 +1,6 @@
 # Copyright (c) 2020 Carnegie Mellon University, Wenshan Wang <wenshanw@andrew.cmu.edu>
 # For License information please see the LICENSE file in the root directory.
-
+# -*- coding:utf8 -*-
 import numpy as np
 from os.path import isdir, isfile
 
@@ -58,15 +58,15 @@ class TartanAirEvaluator:
         est_traj = est_traj.astype(np.float64)
 
         ate_score, gt_ate_aligned, est_ate_aligned = self.ate_eval.evaluate(gt_traj, est_traj, scale)
-
+        # ate rmse m
         plot_traj(np.matrix(gt_ate_aligned), np.matrix(est_ate_aligned), vis=False, savefigname="figures/%s.pdf"%title, title=title)
 
         est_ate_aligned = np.array(est_ate_aligned)
         gt_SEs, est_SEs = quats2SEs(gt_ate_aligned, est_ate_aligned)
 
 
-
-        rpe_score = self.rpe_eval.evaluate(gt_SEs, est_SEs)
+        # roterr: rads tranerr: m
+        rpe_score = self.rpe_eval.evaluate(gt_SEs, est_SEs) # 默认所有pair avgrot avgtran per pair
         kitti_score = self.kitti_eval.evaluate(gt_SEs, est_SEs)
 
         return {'ate_score': ate_score, 'rpe_score': rpe_score, 'kitti_score': kitti_score}

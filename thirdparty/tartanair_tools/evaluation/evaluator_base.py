@@ -1,6 +1,6 @@
 # Copyright (c) 2020 Carnegie Mellon University, Wenshan Wang <wenshanw@andrew.cmu.edu>
 # For License information please see the LICENSE file in the root directory.
-
+# -*- coding:utf8 -*-
 import numpy as np
 from .trajectory_transform import trajectory_transform, rescale
 from .transformation import pos_quats2SE_matrices, SE2pos_quat
@@ -36,7 +36,7 @@ class ATEEvaluator(object):
 
         rot, trans, trans_error, s = align(gt_xyz, est_xyz, scale)
         print('  ATE scale: {}'.format(s))
-        error = np.sqrt(np.dot(trans_error,trans_error) / len(trans_error))
+        error = np.sqrt(np.dot(trans_error,trans_error) / len(trans_error))# ATE RMSE
 
         # align two trajs 
         est_SEs = pos_quats2SE_matrices(est_traj)
@@ -64,11 +64,11 @@ class RPEEvaluator(object):
 
 
     def evaluate(self, gt_SEs, est_SEs):
-        result = evaluate_trajectory(gt_SEs, est_SEs)
+        result = evaluate_trajectory(gt_SEs, est_SEs) #默认10000个任意距离的pair list(i,j,trans,rota)
         
         trans_error = np.array(result)[:,2]
         rot_error = np.array(result)[:,3]
-
+        #直接在pair num 上平均
         trans_error_mean = np.mean(trans_error)
         rot_error_mean = np.mean(rot_error)
 
@@ -88,4 +88,4 @@ class KittiEvaluator(object):
     def evaluate(self, gt_SEs, est_SEs):
         # trajectory_scale(est_SEs, 0.831984631412)
         error = kittievaluate(gt_SEs, est_SEs)
-        return error
+        return error #degree/m m/m

@@ -159,6 +159,26 @@ def pos_quats2SE_matrices(quat_datas):
 
 def SE2pos_quat(SE_data):
     pos_quat = np.zeros(7)
-    pos_quat[3:] = SO2quat(SE_data[0:3,0:3])
+    pos_quat[3:] = SO2quat(SE_data[0:3,0:3]) # x y z w
     pos_quat[:3] = SE_data[0:3,3].T
     return pos_quat
+
+def SE_matrices2pos_quats(SE_matrices):
+    """kitti格式的gt(Nx12)转为 x y x qx qy qz qw
+
+    Args:
+        SE_matrices (ndarray): [Nx12]
+
+    Returns:
+        [list]: [位姿列表 Nx7]
+    """
+    data_len = SE_matrices.shape[0]
+    quats = []
+    for SEl in SE_matrices:
+        SE = np.eye(4)
+        SE[0,0:4] = SEl[0:4]
+        SE[1,0:4] = SEl[4:8]
+        SE[2,0:4] = SEl[8:12]
+        pos_quat = SE2pos_quat(SE)
+        quats.append(pos_quat)
+    return quats

@@ -1,6 +1,7 @@
 import torch
 import lietorch
 import numpy as np
+from torch._C import device
 
 from droid_net import DroidNet
 from depth_video import DepthVideo
@@ -11,14 +12,36 @@ from trajectory_filler import PoseTrajectoryFiller
 
 from collections import OrderedDict
 from torch.multiprocessing import Process
+# -*- coding:utf8 -*-
+import geom.projective_ops as pops
+from droid_net import upsample_disp, cvx_upsample
+import matplotlib as mpl
+import matplotlib.cm as cm
+import cv2
+import os
+from flow_vis import flow_to_image
+# https://github.com/JiawangBian/SC-SfMLearner-Release/blob/7a1fdc5f108f484c66fe022f81c99281ae8b8048/eval_depth.py
+def depth_visualizer(data):
+    """
+    Args:
+        data (HxW): depth data
+    Returns:
+        vis_data (HxWx3): depth visualization (RGB)
+    """
 
+    inv_depth = data
+    vmax = np.percentile(inv_depth, 95)
+    normalizer = mpl.colors.Normalize(vmin=inv_depth.min(), vmax=vmax)
+    mapper = cm.ScalarMappable(norm=normalizer, cmap='magma')
+    vis_data = (mapper.to_rgba(inv_depth)[:, :, :3] * 255).astype(np.uint8)
+    return vis_data
 
 class Droid:
     def __init__(self, args):
         super(Droid, self).__init__()
-        self.load_weights(args.weights)
+        self.load_weights(args.weights) # 载入trained模型参数
         self.args = args
-        self.disable_vis = args.disable_vis
+        self.disable_vis = args.disable_vis # 是否可视化地图
 
         # store images, depth, poses, intrinsics (shared between processes)
         self.video = DepthVideo(args.image_size, args.buffer, stereo=args.stereo)
@@ -26,10 +49,10 @@ class Droid:
         # filter incoming frames so that there is enough motion
         self.filterx = MotionFilter(self.net, self.video, thresh=args.filter_thresh)
 
-        # frontend process
+        # frontend process track 和  lba?
         self.frontend = DroidFrontend(self.net, self.video, self.args)
         
-        # backend process
+        # backend process gba
         self.backend = DroidBackend(self.net, self.video, self.args)
 
         # visualizer
@@ -46,8 +69,8 @@ class Droid:
         """ load trained model weights """
 
         print(weights)
-        self.net = DroidNet()
-        state_dict = OrderedDict([
+        self.net = DroidNet() #该类包含所有的网络入口吧
+        state_dict = OrderedDict([ # module. 被替换为空
             (k.replace("module.", ""), v) for (k, v) in torch.load(weights).items()])
 
         state_dict["update.weight.2.weight"] = state_dict["update.weight.2.weight"][:2]
@@ -55,13 +78,15 @@ class Droid:
         state_dict["update.delta.2.weight"] = state_dict["update.delta.2.weight"][:2]
         state_dict["update.delta.2.bias"] = state_dict["update.delta.2.bias"][:2]
 
-        self.net.load_state_dict(state_dict)
-        self.net.to("cuda:0").eval()
+        self.net.load_state_dict(state_dict) #加载模型
+        self.net.to("cuda:0").eval() # 不训练 限制在卡0
 
     def track(self, tstamp, image, depth=None, intrinsics=None):
-        """ main thread - update map """
+        """ main thread - update map 
+            salm前端 跟踪主线程 会更改 frame graph
+        """
 
-        with torch.no_grad():
+        with torch.no_grad(): #不计算梯度
             # check there is enough motion
             self.filterx.track(tstamp, image, depth, intrinsics)
 
@@ -83,7 +108,10 @@ class Droid:
         torch.cuda.empty_cache()
         print("#" * 32)
         self.backend(12)
-
+        
+        # torch.cuda.empty_cache()
+        # self.backend.onlyvis(steps=1) 
+           
         camera_trajectory = self.traj_filler(stream)
         return camera_trajectory.inv().data.cpu().numpy()
 

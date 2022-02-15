@@ -21,7 +21,7 @@ def show_image(image):
     image = image.permute(1, 2, 0).cpu().numpy()
     cv2.imshow('image', image / 255.0)
     cv2.waitKey(1)
-
+#[458,639]
 def image_stream(datapath, use_depth=False, stride=1):
     """ image generator """
 
@@ -33,12 +33,12 @@ def image_stream(datapath, use_depth=False, stride=1):
         image = cv2.imread(image_file)
         depth = cv2.imread(depth_file, cv2.IMREAD_ANYDEPTH) / 5000.0
 
-        h0, w0, _ = image.shape
-        h1 = int(h0 * np.sqrt((384 * 512) / (h0 * w0)))
-        w1 = int(w0 * np.sqrt((384 * 512) / (h0 * w0)))
+        h0, w0, _ = image.shape#[458,639]  384 * 512=196608 h0 * w0=292662
+        h1 = int(h0 * np.sqrt((384 * 512) / (h0 * w0)))#375.390 375
+        w1 = int(w0 * np.sqrt((384 * 512) / (h0 * w0)))#523.743 523
 
         image = cv2.resize(image, (w1, h1))
-        image = image[:h1-h1%8, :w1-w1%8]
+        image = image[:h1-h1%8, :w1-w1%8] #375-7=368  523-3=520 ->[368,520]
         image = torch.as_tensor(image).permute(2, 0, 1)
         
         depth = torch.as_tensor(depth)

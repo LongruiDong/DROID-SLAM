@@ -19,7 +19,7 @@ ocean/ocean/Hard/P009
 office2/office2/Easy/P011
 office2/office2/Hard/P010
 office/office/Hard/P007
-oldtown/oldtown/Easy/P007
+oldtown/oldtown/Easy/P001
 oldtown/oldtown/Hard/P008
 seasidetown/seasidetown/Easy/P009
 seasonsforest/seasonsforest/Easy/P011

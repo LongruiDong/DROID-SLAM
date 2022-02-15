@@ -31,7 +31,7 @@
 # LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-
+# -*- coding:utf8 -*-
 """
 This script computes the relative pose error from the ground truth trajectory
 and the estimated trajectory.
@@ -126,7 +126,7 @@ def evaluate_trajectory(traj_gt, traj_est, param_max_pairs=10000, param_fixed_de
                            ominus( traj_gt[j], traj_gt[i] ) )
         
         trans = compute_distance(error44)
-        rot = compute_angle(error44)
+        rot = compute_angle(error44) # rads
         
         result.append([i,j,trans,rot])
         

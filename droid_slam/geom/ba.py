@@ -1,7 +1,7 @@
 import lietorch
 import torch
 import torch.nn.functional as F
-
+# -*- coding:utf8 -*-
 from .chol import block_solve, schur_solve
 import geom.projective_ops as pops
 

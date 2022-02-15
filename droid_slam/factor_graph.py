@@ -1,17 +1,52 @@
 import torch
 import lietorch
 import numpy as np
-
+# -*- coding:utf8 -*-
 import matplotlib.pyplot as plt
 from lietorch import SE3
 from modules.corr import CorrBlock, AltCorrBlock
 import geom.projective_ops as pops
+from droid_net import upsample_disp, cvx_upsample
+import matplotlib as mpl
+import matplotlib.cm as cm
+import cv2
+import os
+from flow_vis import flow_to_image
+# https://github.com/JiawangBian/SC-SfMLearner-Release/blob/7a1fdc5f108f484c66fe022f81c99281ae8b8048/eval_depth.py
+def depth_visualizer(data):
+    """
+    Args:
+        data (HxW): depth data
+    Returns:
+        vis_data (HxWx3): depth visualization (RGB)
+    """
 
+    inv_depth = data
+    vmax = np.percentile(inv_depth, 95)
+    normalizer = mpl.colors.Normalize(vmin=inv_depth.min(), vmax=vmax)
+    mapper = cm.ScalarMappable(norm=normalizer, cmap='magma')
+    vis_data = (mapper.to_rgba(inv_depth)[:, :, :3] * 255).astype(np.uint8)
+    return vis_data
+
+# https://www.zhihu.com/question/274926848/answer/784905939
+def show_wtonimg(img, mask, filepath):
+    """[summary]
+
+    Args:
+        img ([ndarray]): [HxWx3]
+        mask ([ndarray]): [HxW]
+        filepath ([str]): [filepath]
+    """
+    heatmap = cv2.applyColorMap(np.uint8(255*mask), cv2.COLORMAP_JET) #(h0,w0,3)
+    heatmap = np.float32(heatmap) / 255
+    cam = heatmap + np.float32(img)
+    cam = cam / np.max(cam)
+    cv2.imwrite(filepath, np.uint8(255*cam))
 
 class FactorGraph:
     def __init__(self, video, update_op, device="cuda:0", corr_impl="volume", max_factors=-1):
         self.video = video
-        self.update_op = update_op
+        self.update_op = update_op # DroidNet().update
         self.device = device
         self.max_factors = max_factors
         self.corr_impl = corr_impl
@@ -20,23 +55,24 @@ class FactorGraph:
         self.ht = ht = video.ht // 8
         self.wd = wd = video.wd // 8
 
-        self.coords0 = pops.coords_grid(ht, wd, device=device)
-        self.ii = torch.as_tensor([], dtype=torch.long, device=device)
+        self.coords0 = pops.coords_grid(ht, wd, device=device) # (48,64,2) 初始就是坐标网格
+        self.ii = torch.as_tensor([], dtype=torch.long, device=device) # 初始化 表示已经建立的边 1d
         self.jj = torch.as_tensor([], dtype=torch.long, device=device)
-        self.age = torch.as_tensor([], dtype=torch.long, device=device)
+        self.age = torch.as_tensor([], dtype=torch.long, device=device) # 什么age： graph 上update的次数
 
         self.corr, self.net, self.inp = None, None, None
-        self.damping = 1e-6 * torch.ones_like(self.video.disps)
-
+        self.damping = 1e-6 * torch.ones_like(self.video.disps) #(1000,48,64) 优化时用到 阻尼 初始1e-6
+        self.upmask = torch.ones([1000, 576, ht, wd], device="cuda:1", dtype=torch.float) #(1,#v,576,48,64)
+        # 2d 坐标
         self.target = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
         self.weight = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
 
-        # inactive factors
+        # inactive factors #未激活的边？
         self.ii_inac = torch.as_tensor([], dtype=torch.long, device=device)
         self.jj_inac = torch.as_tensor([], dtype=torch.long, device=device)
         self.ii_bad = torch.as_tensor([], dtype=torch.long, device=device)
         self.jj_bad = torch.as_tensor([], dtype=torch.long, device=device)
-
+        # 对应点坐标 和权重都初始0
         self.target_inac = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
         self.weight_inac = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
 
@@ -82,8 +118,8 @@ class FactorGraph:
         self.inp = None
 
     @torch.cuda.amp.autocast(enabled=True)
-    def add_factors(self, ii, jj, remove=False):
-        """ add edges to factor graph """
+    def add_factors(self, ii, jj, remove=False):# (ii[.],jj[.]) 即为一条边
+        """ add edges to factor graph """ #并更新factor graph 的成员变量
 
         if not isinstance(ii, torch.Tensor):
             ii = torch.as_tensor(ii, dtype=torch.long, device=self.device)
@@ -91,7 +127,7 @@ class FactorGraph:
         if not isinstance(jj, torch.Tensor):
             jj = torch.as_tensor(jj, dtype=torch.long, device=self.device)
 
-        # remove duplicate edges
+        # remove duplicate edges 是和self.ii 对比 去重 现有 (0,1) (1,0) 还在
         ii, jj = self.__filter_repeated_edges(ii, jj)
 
 
@@ -104,31 +140,31 @@ class FactorGraph:
             
             ix = torch.arange(len(self.age))[torch.argsort(self.age).cpu()]
             self.rm_factors(ix >= self.max_factors - ii.shape[0], store=True)
-
+        # 取出左顶点帧 的 net（h）(x,128,48,64)->(1,x,128,48,64) 增多维度
         net = self.video.nets[ii].to(self.device).unsqueeze(0)
 
         # correlation volume for new edges
         if self.corr_impl == "volume":
-            c = (ii == jj).long()
-            fmap1 = self.video.fmaps[ii,0].to(self.device).unsqueeze(0)
-            fmap2 = self.video.fmaps[jj,c].to(self.device).unsqueeze(0)
-            corr = CorrBlock(fmap1, fmap2)
+            c = (ii == jj).long() # 左右顶点本来就不可能一样吧 意义何在 判断单双目？
+            fmap1 = self.video.fmaps[ii,0].to(self.device).unsqueeze(0) #(1,x,128,48,64)
+            fmap2 = self.video.fmaps[jj,c].to(self.device).unsqueeze(0) #同上 两顶点帧的 fmap
+            corr = CorrBlock(fmap1, fmap2) #(batchxnum,48,64,48/2^l,64/2^l) 每个第一维元素就是 每个边的corr parymid
             self.corr = corr if self.corr is None else self.corr.cat(corr)
 
-            inp = self.video.inps[ii].to(self.device).unsqueeze(0)
+            inp = self.video.inps[ii].to(self.device).unsqueeze(0) #顶点i的(1,x,128,48,64)
             self.inp = inp if self.inp is None else torch.cat([self.inp, inp], 1)
 
         with torch.cuda.amp.autocast(enabled=False):
-            target, _ = self.video.reproject(ii, jj)
-            weight = torch.zeros_like(target)
+            target, _ = self.video.reproject(ii, jj) #(1,60,48,64,2),(1,60,48,64,1)
+            weight = torch.zeros_like(target) #all 0 (1,60,48,64,2)
 
-        self.ii = torch.cat([self.ii, ii], 0)
+        self.ii = torch.cat([self.ii, ii], 0) #不断增加存储目前 graph的边
         self.jj = torch.cat([self.jj, jj], 0)
-        self.age = torch.cat([self.age, torch.zeros_like(ii)], 0)
+        self.age = torch.cat([self.age, torch.zeros_like(ii)], 0) #新增的边 age=0
 
-        # reprojection factors
+        # reprojection factors (1,x,128,48,64)
         self.net = net if self.net is None else torch.cat([self.net, net], 1)
-
+        # 更新增加当前已有 的量(1,60,48,64,2)
         self.target = torch.cat([self.target, target], 1)
         self.weight = torch.cat([self.weight, weight], 1)
 
@@ -195,33 +231,33 @@ class FactorGraph:
 
     @torch.cuda.amp.autocast(enabled=True)
     def update(self, t0=None, t1=None, itrs=2, use_inactive=False, EP=1e-7, motion_only=False):
-        """ run update operator on factor graph """
+        """ run update operator on factor graph """ #注意不要和raft-slam 中的updator搞混！
 
-        # motion features
+        # motion features ：投影后的偏移和 优化后与之前投影位置地偏差
         with torch.cuda.amp.autocast(enabled=False):
-            coords1, mask = self.video.reproject(self.ii, self.jj)
-            motn = torch.cat([coords1 - self.coords0, self.target - coords1], dim=-1)
-            motn = motn.permute(0,1,4,2,3).clamp(-64.0, 64.0)
+            coords1, mask = self.video.reproject(self.ii, self.jj) #这里是对当前整个graph重投影对应关系 (1,#,48,64,2) (1,#,48,64,1)
+            motn = torch.cat([coords1 - self.coords0, self.target - coords1], dim=-1) #(1,#,48,64,2) (1,#,48,64,2)->(1,#,48,64,4)
+            motn = motn.permute(0,1,4,2,3).clamp(-64.0, 64.0) #(1,60,4,48,64) 把值限制在闭区间[-64,64]
         
-        # correlation features
-        corr = self.corr(coords1)
-
+        # correlation features 对corr volume index 后两维ii上每个坐标 在jj上对应点 每个level (7,7) 在corr volume中得到的相似性
+        corr = self.corr(coords1) #(1,#edge60,196,48,64)
+        # raft-slam update operator 上次是在motion filter中一次更新
         self.net, delta, weight, damping, upmask = \
-            self.update_op(self.net, self.inp, corr, motn, self.ii, self.jj)
+            self.update_op(self.net, self.inp, corr, motn, self.ii, self.jj)#(1,#edge,128,48,64) (1,#edge,48,64,2)(1,#e,48,64,2) (1,#v,48,64),(1,#v,576,48,64)
 
-        if t0 is None:
+        if t0 is None: #输入1
             t0 = max(1, self.ii.min().item()+1)
 
         with torch.cuda.amp.autocast(enabled=False):
-            self.target = coords1 + delta.to(dtype=torch.float)
-            self.weight = weight.to(dtype=torch.float)
+            self.target = coords1 + delta.to(dtype=torch.float) #对对应关系进行修正
+            self.weight = weight.to(dtype=torch.float) #更新权重 (1,#e,48,64,2)
 
-            ht, wd = self.coords0.shape[0:2]
-            self.damping[torch.unique(self.ii)] = damping
+            ht, wd = self.coords0.shape[0:2] #48,64
+            self.damping[torch.unique(self.ii)] = damping # 当前graph顶点(1,#v,48,64)
 
-            if use_inactive:
-                m = (self.ii_inac >= t0 - 3) & (self.jj_inac >= t0 - 3)
-                ii = torch.cat([self.ii_inac[m], self.ii], 0)
+            if use_inactive: #该选项
+                m = (self.ii_inac >= t0 - 3) & (self.jj_inac >= t0 - 3) #初始化时 都是空的
+                ii = torch.cat([self.ii_inac[m], self.ii], 0) # 当前的边和未激活的边（满足时间要求）
                 jj = torch.cat([self.jj_inac[m], self.jj], 0)
                 target = torch.cat([self.target_inac[:,m], self.target], 1)
                 weight = torch.cat([self.weight_inac[:,m], self.weight], 1)
@@ -229,17 +265,17 @@ class FactorGraph:
             else:
                 ii, jj, target, weight = self.ii, self.jj, self.target, self.weight
 
-
+            #在ba前对damp 减小 (#v=12，48，64)
             damping = .2 * self.damping[torch.unique(ii)].contiguous() + EP
 
-            target = target.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
-            weight = weight.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
+            target = target.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous() #(#e,2,48,64)
+            weight = weight.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous() #(#e,2,48,64)
 
-            # dense bundle adjustment
+            # dense bundle adjustment 核心！  (#e=60) 1, t1 none 2次 lm是L-M吗
             self.video.ba(target, weight, damping, ii, jj, t0, t1, 
                 itrs=itrs, lm=1e-4, ep=0.1, motion_only=motion_only)
         
-        self.age += 1
+        self.age += 1 # 每做一次局部ba 就增加
 
 
     @torch.cuda.amp.autocast(enabled=False)
@@ -270,16 +306,19 @@ class FactorGraph:
 
                 with torch.cuda.amp.autocast(enabled=True):
                  
-                    net, delta, weight, damping, _ = \
+                    net, delta, weight, damping, upmask = \
                         self.update_op(self.net[:,v], self.video.inps[None,iis], corr1, motn[:,v], iis, jjs)
 
 
                 self.net[:,v] = net
                 self.target[:,v] = coords1[:,v] + delta.float()
                 self.weight[:,v] = weight.float()
-                self.damping[torch.unique(iis)] = damping
+                self.damping[torch.unique(iis)] = damping #(1,8,48,64)
+                upmask = upmask.to("cuda:1")
+                self.upmask[torch.unique(iis)] = upmask.float() #(1,8,576,48,64)
 
             damping = .2 * self.damping[torch.unique(self.ii)].contiguous() + EP
+            # upmask = self.upmask[torch.unique(self.ii)].contiguous() ##(#v,576,48,64)
             target = self.target.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
             weight = self.weight.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
 
@@ -288,18 +327,218 @@ class FactorGraph:
                 itrs=itrs, lm=1e-5, ep=1e-2, motion_only=False)
 
             self.video.dirty[:t] = True
+        
+        torch.cuda.empty_cache() 
+        #这里已经进行完所有优化了 在这里拿出 disp flow weight 吧！
+        # disps = self.video.disps #(_,48,64)
+        # disps = disps[torch.unique(self.ii)].contiguous()
+        # fnum,_,_ = disps.shape
+        # #先上采样
+        # upmask = upmask.view(1,-1,576,ht,wd)
+        # disps = disps.view(1,-1,ht,wd)#(1,_,48,64)
+        # updisps = upsample_disp(disps, upmask) # upm(1,_,576,48,64) 帧数 #(#v,h0,w0,1)
+        # _,fnum, h0, w0 = updisps.shape #[1, 141, 384, 512]
 
+        # updisps = updisps.view(fnum,h0,w0) #(#v,h0,w0)
+        # for i in range(fnum):
+        #     rawatmp = int(self.video.tstamp[i].data.cpu().numpy()) #原始输入的id
+        #     dispi = updisps[i]
+        #     disparr = dispi.data.cpu().numpy()
+        #     disp_vis = depth_visualizer(disparr) #深度的可视化
+        #     disp_path = os.path.join('visresult','{:06d}.png'.format(rawatmp))
+        #     cv2.imwrite(disp_path, cv2.cvtColor(disp_vis, cv2.COLOR_RGB2BGR))
+        
+        # fnum = torch.unique(self.ii).shape[0]
+        # with torch.cuda.amp.autocast(enabled=False):
+        #     coords1, mask = self.video.reproject(self.ii, self.jj) # --(1,#e,48,64,2),(1,60,48,64,1)
+        # flow = coords1-self.coords0 # -(ht,wd,2)
+        # batch, edgenum, _, _, dim = flow.shape
+        # flow = flow.view(batch*edgenum,ht,wd,dim) # (#edge,48,64,2)
+        # edgemask = upmask[self.ii,:,:,:] # 本来是和顶点数相同 这次按每条边的顶点i索引 就得到边数
+        # weight = self.weight.view(-1, ht, wd, 2).contiguous() #(#edge,2,48,64)
+        # # weight = weight.permute(0,2,3,1)#(#edge,48,64,2)
+        
+        # #对上采样后的光流可视化
+        # for fi in range(fnum):
+        #     torch.cuda.empty_cache() 
+        #     rawatmp = int(self.video.tstamp[fi].data.cpu().numpy()) #原始输入的id
+        #     # 从边的集合中找到.ii==fi的 首个边吧
+        #     siiarr = self.ii.data.cpu().numpy()
+        #     edgeindex = np.argwhere( siiarr==fi ) #(,1)
+        #     # 把上采样放这里 节省cuda
+        #     weighti = weight[edgeindex[0,0]][None]
+        #     flowi = flow[edgeindex[0,0]][None] #(1,ht,wd,2)
+        #     edgemki = edgemask[edgeindex[0,0]][None] #(1,576,ht,wd)
+        #     flowifi = cvx_upsample(flowi,edgemki)
+        #     upweighti = cvx_upsample(weighti,edgemki) #(#e,h0,w0,2)
+        #     # flowifi = upflow[edgeindex[0]] #(h0,w0,2)
+        #     flowfi = flowifi.data.cpu().numpy()[0]
+        #     upwtfi = upweighti.data.cpu().numpy()[0]
+        #     upwtix = upwtfi[:,:,0] # (h0,w0,1)
+        #     upwtiy = upwtfi[:,:,1]
+        #     # map flow to rgb image
+        #     flo = flow_to_image(flowfi) #(h0,w0,3)
+        #     flo = flo[:, :, [2,1,0]] #为啥纯黑 /255.0
+        #     flo_path = os.path.join('visresult/flow','{:06d}.png'.format(rawatmp))
+        #     # cv2.imshow('{:d}'.format(rawatmp), flo)
+        #     # cv2.waitKey()
+        #     cv2.imwrite(flo_path, flo)
+        
+        # return self.ii, self.jj, self.weight.view(-1, ht, wd, 2).contiguous(), self.upmask[torch.unique(self.ii)].contiguous() #(#v,576,ht,wd)
+    
+    @torch.cuda.amp.autocast(enabled=False)
+    def vis_lowmem(self, use_inactive=False):
+        """  """
+
+        # alternate corr implementation
+        t = self.video.counter.value
+
+        num, rig, ch, ht, wd = self.video.fmaps.shape
+        corr_op = AltCorrBlock(self.video.fmaps.view(1, num*rig, ch, ht, wd))
+
+        # for step in range(steps):
+        # print("Global BA Iteration #{}".format(step+1))
+        with torch.cuda.amp.autocast(enabled=False):
+            coords1, _ = self.video.reproject(self.ii, self.jj)
+            motn = torch.cat([coords1 - self.coords0, self.target - coords1], dim=-1)
+            motn = motn.permute(0,1,4,2,3).clamp(-64.0, 64.0)
+
+        s = 8
+        for i in range(0, self.jj.max()+1, s):
+            v = (self.ii >= i) & (self.ii < i + s)
+            iis = self.ii[v]
+            jjs = self.jj[v]
+
+            ht, wd = self.coords0.shape[0:2]
+            corr1 = corr_op(coords1[:,v], rig * iis, rig * jjs + (iis == jjs).long())
+
+            with torch.cuda.amp.autocast(enabled=True):
+                
+                net, delta, weight, damping, upmask = \
+                    self.update_op(self.net[:,v], self.video.inps[None,iis], corr1, motn[:,v], iis, jjs)
+
+
+            self.net[:,v] = net
+            self.target[:,v] = coords1[:,v] + delta.float()
+            self.weight[:,v] = weight.float()
+            self.damping[torch.unique(iis)] = damping #(1,8,48,64)
+            upmask = upmask.to("cuda:1")
+            self.upmask[torch.unique(iis)] = upmask.float() #(1,8,576,48,64)
+
+        damping = .2 * self.damping[torch.unique(self.ii)].contiguous() + 1e-7
+        upmask = self.upmask[torch.unique(self.ii)].contiguous() ##(#v,576,48,64)
+        target = self.target.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
+        weight = self.weight.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
+
+        # dense bundle adjustment
+        self.video.ba(target, weight, damping, self.ii, self.jj, 1, t, 
+            itrs=2, lm=1e-5, ep=1e-2, motion_only=False)
+
+        self.video.dirty[:t] = True
+        seq = '09'
+        depthdir = 'visresult/depth/'+seq
+        flowdir = 'visresult/flow/'+seq
+        weightxdir = 'visresult/weightx/'+seq
+        weightydir = 'visresult/weighty/'+seq
+        if not os.path.exists(depthdir):
+            os.makedirs(depthdir)
+        if not os.path.exists(flowdir):
+            os.makedirs(flowdir)
+        if not os.path.exists(weightxdir):
+            os.makedirs(weightxdir)
+        if not os.path.exists(weightydir):
+            os.makedirs(weightydir)
+        #这里已经进行完所有优化了 在这里拿出 disp flow weight 吧！
+        fnum = torch.unique(self.ii).shape[0]
+        with torch.cuda.amp.autocast(enabled=False):
+            coords1, _ = self.video.reproject(self.ii, self.jj) # --(1,#e,48,64,2),(1,60,48,64,1)
+        flow = coords1-self.coords0 # -(ht,wd,2)
+        batch, edgenum, _, _, dim = flow.shape
+        flow = flow.view(batch*edgenum,ht,wd,dim) # (#edge,48,64,2)
+        # edgemask = upmask[self.ii,:,:,:] # 本来是和顶点数相同 这次按每条边的顶点i索引 就得到边数
+        weight = self.weight.view(-1, ht, wd, 2).contiguous() #(#edge,2,48,64)
+        # weight = weight.permute(0,2,3,1)#(#edge,48,64,2)
+        
+        #对上采样后的光流可视化 和 权重两方向可视化
+        for fi in range(fnum):
+            torch.cuda.empty_cache() 
+            rawatmp = int(self.video.tstamp[fi].data.cpu().numpy()) #原始输入的id
+            # 从边的集合中找到.ii==fi的 首个边吧
+            siiarr = self.ii.data.cpu().numpy()
+            edgeindex = np.argwhere( siiarr==fi ) #(,1)
+            edgeindex = edgeindex[:,0]
+            edgevjjs = self.jj.data.cpu().numpy()[edgeindex]
+            distedge = np.abs(edgevjjs - fi)
+            bigind = np.where(distedge>=3)
+            
+            if bigind[0].shape[0] > 0:
+                selectedg = bigind[0][0]
+            else:
+                selectedg = 0
+            # 把上采样放这里 节省cuda
+            weighti = weight[edgeindex[selectedg]][None]
+            flowi = flow[edgeindex[selectedg]][None] #(1,ht,wd,2)
+            # edgemki = edgemask[edgeindex[0,0]][None] #(1,576,ht,wd)
+            edgemki = upmask[fi][None]
+            flowi = flowi.to("cuda:1")
+            weighti = weighti.to("cuda:1")
+            flowifi = cvx_upsample(flowi,edgemki)
+            upweighti = cvx_upsample(weighti,edgemki) #(#e,h0,w0,2)
+            # flowifi = upflow[edgeindex[0]] #(h0,w0,2)
+            flowfi = flowifi.data.cpu().numpy()[0]
+            upwtfi = upweighti.data.cpu().numpy()[0]
+            upwtix = upwtfi[:,:,0] # (h0,w0,1)
+            upwtiy = upwtfi[:,:,1]
+            # map flow to rgb image
+            flo = flow_to_image(flowfi) #(h0,w0,3)
+            flo = flo[:, :, [2,1,0]] #为啥纯黑 /255.0
+            flo_path = os.path.join(flowdir,'{:06d}.png'.format(rawatmp))
+            # cv2.imshow('{:d}'.format(rawatmp), flo)
+            # cv2.waitKey()
+            cv2.imwrite(flo_path, flo)
+            #
+            imgi = self.video.images[fi] #(3,h0,w0)
+            imgi = imgi.permute(1,2,0).data.cpu().numpy() #(h0,w0,3)
+            imgi = np.float32(imgi) / 255
+            wtxpath = os.path.join(weightxdir,'{:06d}.png'.format(rawatmp))
+            wtypath = os.path.join(weightydir,'{:06d}.png'.format(rawatmp))
+            show_wtonimg(imgi,upwtix,wtxpath)
+            show_wtonimg(imgi,upwtiy,wtypath)
+            
+        
+        # 深度可视化
+        disps = self.video.disps #(_,48,64)
+        disps = disps[torch.unique(self.ii)].contiguous()
+        fnum,_,_ = disps.shape
+        #先上采样
+        upmask = upmask.view(1,-1,576,ht,wd)
+        disps = disps.view(1,-1,ht,wd)#(1,_,48,64)
+
+        for i in range(fnum):
+            rawatmp = int(self.video.tstamp[i].data.cpu().numpy()) #原始输入的id
+            upmaski = upmask[:,i,:,:,:].view(1,-1,576,ht,wd)#(1,1,576,ht,wd)
+            dispi = disps[:,i,:,:].view(1,-1,ht,wd)#(1,1,ht,wd)
+            dispi = dispi.to("cuda:1")
+            updispi = upsample_disp(dispi,upmaski) #(1,1,h0,w0)
+            # dispi = updisps[i]
+            updispi = updispi[0,0,:,:]
+            disparr = updispi.data.cpu().numpy()
+            disp_vis = depth_visualizer(disparr) #深度的可视化
+            disp_path = os.path.join(depthdir,'{:06d}.png'.format(rawatmp))
+            cv2.imwrite(disp_path, cv2.cvtColor(disp_vis, cv2.COLOR_RGB2BGR))
+        
+        
     def add_neighborhood_factors(self, t0, t1, r=3):
         """ add edges between neighboring frames within radius r """
 
-        ii, jj = torch.meshgrid(torch.arange(t0,t1), torch.arange(t0,t1))
-        ii = ii.reshape(-1).to(dtype=torch.long, device=self.device)
-        jj = jj.reshape(-1).to(dtype=torch.long, device=self.device)
+        ii, jj = torch.meshgrid(torch.arange(t0,t1), torch.arange(t0,t1)) #(12,12) (12,12)
+        ii = ii.reshape(-1).to(dtype=torch.long, device=self.device) #按行连接 (144) 向量 000000...
+        jj = jj.reshape(-1).to(dtype=torch.long, device=self.device) #  0123..
 
         c = 1 if self.video.stereo else 0
-
-        keep = ((ii - jj).abs() > c) & ((ii - jj).abs() <= r)
-        self.add_factors(ii[keep], jj[keep])
+        #abs(ii-jj) 拉到1d的表示下标距离的邻接矩阵
+        keep = ((ii - jj).abs() > c) & ((ii - jj).abs() <= r) #mask
+        self.add_factors(ii[keep], jj[keep]) # #长度<=144 用mask过滤即得到 (ii, jj) 即为符合半径 每条边的两顶点的index
 
     
     def add_proximity_factors(self, t0=0, t1=0, rad=2, nms=2, beta=0.25, thresh=16.0, remove=False):

@@ -100,10 +100,10 @@ def calculate_ave_errors(errors,lengths=[10,20,30,40,50,60,70,80]):
         else:
             rot_errors.append(sum(rot_error_each_length)/len(rot_error_each_length))
             tra_errors.append(sum(tra_error_each_length)/len(tra_error_each_length))
-    return np.array(rot_errors)*180/np.pi, tra_errors
+    return np.array(rot_errors)*180/np.pi, tra_errors # degree/m m/m
 
 def evaluate(gt, data,rescale_=False):
-    lens =  [5,10,15,20,25,30,35,40] #[1,2,3,4,5,6] # 
+    lens =  [100,200,300,400,500,600,700,800] #[1,2,3,4,5,6] # [5,10,15,20,25,30,35,40] 
     errors = calculate_sequence_error(gt, data, lengths=lens)
     rot,tra = calculate_ave_errors(errors, lengths=lens)
     return np.mean(rot), np.mean(tra)
