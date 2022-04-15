@@ -44,7 +44,7 @@ def show_wtonimg(img, mask, filepath):
     cv2.imwrite(filepath, np.uint8(255*cam))
 
 class FactorGraph:
-    def __init__(self, video, update_op, device="cuda:0", corr_impl="volume", max_factors=-1):
+    def __init__(self, video, update_op, device="cuda:0", corr_impl="volume", max_factors=-1, seq="I0"):
         self.video = video
         self.update_op = update_op # DroidNet().update
         self.device = device
@@ -62,7 +62,7 @@ class FactorGraph:
 
         self.corr, self.net, self.inp = None, None, None
         self.damping = 1e-6 * torch.ones_like(self.video.disps) #(1000,48,64) 优化时用到 阻尼 初始1e-6
-        self.upmask = torch.ones([1000, 576, ht, wd], device="cuda:1", dtype=torch.float) #(1,#v,576,48,64)
+        self.upmask = torch.ones([1000, 576, ht, wd], device="cuda:1", dtype=torch.float) #(1,#v,576,48,64) for vis
         # 2d 坐标
         self.target = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
         self.weight = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
@@ -75,6 +75,8 @@ class FactorGraph:
         # 对应点坐标 和权重都初始0
         self.target_inac = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
         self.weight_inac = torch.zeros([1, 0, ht, wd, 2], device=device, dtype=torch.float)
+        
+        self.seq = seq
 
     def __filter_repeated_edges(self, ii, jj):
         """ remove duplicate edges """
@@ -314,8 +316,8 @@ class FactorGraph:
                 self.target[:,v] = coords1[:,v] + delta.float()
                 self.weight[:,v] = weight.float()
                 self.damping[torch.unique(iis)] = damping #(1,8,48,64)
-                upmask = upmask.to("cuda:1")
-                self.upmask[torch.unique(iis)] = upmask.float() #(1,8,576,48,64)
+                upmask = upmask.to("cuda:1") #for vis
+                self.upmask[torch.unique(iis)] = upmask.float() #(1,8,576,48,64) #for vis
 
             damping = .2 * self.damping[torch.unique(self.ii)].contiguous() + EP
             # upmask = self.upmask[torch.unique(self.ii)].contiguous() ##(#v,576,48,64)
@@ -390,6 +392,7 @@ class FactorGraph:
     def vis_lowmem(self, use_inactive=False):
         """  """
 
+        seq = self.seq
         # alternate corr implementation
         t = self.video.counter.value
 
@@ -422,20 +425,20 @@ class FactorGraph:
             self.target[:,v] = coords1[:,v] + delta.float()
             self.weight[:,v] = weight.float()
             self.damping[torch.unique(iis)] = damping #(1,8,48,64)
-            upmask = upmask.to("cuda:1")
-            self.upmask[torch.unique(iis)] = upmask.float() #(1,8,576,48,64)
+            upmask = upmask.to("cuda:1") #for vis
+            self.upmask[torch.unique(iis)] = upmask.float() #(1,8,576,48,64) # for vis
 
         damping = .2 * self.damping[torch.unique(self.ii)].contiguous() + 1e-7
-        upmask = self.upmask[torch.unique(self.ii)].contiguous() ##(#v,576,48,64)
+        upmask = self.upmask[torch.unique(self.ii)].contiguous() ##(#v,576,48,64) #for vis
         target = self.target.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
         weight = self.weight.view(-1, ht, wd, 2).permute(0,3,1,2).contiguous()
 
         # dense bundle adjustment
         self.video.ba(target, weight, damping, self.ii, self.jj, 1, t, 
             itrs=2, lm=1e-5, ep=1e-2, motion_only=False)
+        
 
         self.video.dirty[:t] = True
-        seq = '09'
         depthdir = 'visresult/depth/'+seq
         flowdir = 'visresult/flow/'+seq
         weightxdir = 'visresult/weightx/'+seq
@@ -479,7 +482,7 @@ class FactorGraph:
             weighti = weight[edgeindex[selectedg]][None]
             flowi = flow[edgeindex[selectedg]][None] #(1,ht,wd,2)
             # edgemki = edgemask[edgeindex[0,0]][None] #(1,576,ht,wd)
-            edgemki = upmask[fi][None]
+            edgemki = upmask[fi][None] #for vis
             flowi = flowi.to("cuda:1")
             weighti = weighti.to("cuda:1")
             flowifi = cvx_upsample(flowi,edgemki)
@@ -511,7 +514,7 @@ class FactorGraph:
         disps = disps[torch.unique(self.ii)].contiguous()
         fnum,_,_ = disps.shape
         #先上采样
-        upmask = upmask.view(1,-1,576,ht,wd)
+        upmask = upmask.view(1,-1,576,ht,wd) #for vis
         disps = disps.view(1,-1,ht,wd)#(1,_,48,64)
 
         for i in range(fnum):
@@ -552,7 +555,7 @@ class FactorGraph:
         ii = ii.reshape(-1)
         jj = jj.reshape(-1)
 
-        d = self.video.distance(ii, jj, beta=beta)
+        d = self.video.distance(ii, jj, beta=beta) #用来？
         d[ii - rad < jj] = np.inf
         d[d > 100] = np.inf
 
@@ -571,7 +574,7 @@ class FactorGraph:
 
         es = []
         for i in range(t0, t):
-            if self.video.stereo:
+            if self.video.stereo: #如果是双目 i-i 建立边
                 es.append((i, i))
                 d[(i-t0)*(t-t1) + (i-t1)] = np.inf
 

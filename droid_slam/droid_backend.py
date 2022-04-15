@@ -42,14 +42,14 @@ class DroidBackend:
         # return selfii, selfjj, weight, upmask
     
     @torch.no_grad()
-    def onlyvis(self, steps=1):
+    def onlyvis(self, steps=1, seq_name="I0"):
         """ test vis """
 
         t = self.video.counter.value
         if not self.video.stereo and not torch.any(self.video.disps_sens):
              self.video.normalize()
 
-        graph = FactorGraph(self.video, self.update_op, corr_impl="alt", max_factors=16*t)
+        graph = FactorGraph(self.video, self.update_op, corr_impl="alt", max_factors=16*t, seq=seq_name)
 
         graph.add_proximity_factors(rad=self.backend_radius, 
                                     nms=self.backend_nms, 

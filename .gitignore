@@ -153,7 +153,26 @@ cache
 *.out
 *.o
 data
-figures/*.pdf
+
 visresult/
+tmpvis
+analysis/
+evoplot/
+result
+result_filp
+result1
+undistort
+log/
+log_mono/
+log_mono_android_flip/
+log_mono_ios/
+log_mono1/
+logarmono
+figures
+
+*.zip
+
+
+
 
 

@@ -16,12 +16,17 @@ def plot_traj(gtposes, estposes, vis=False, savefigname=None, title=''):
 
     cm = plt.cm.get_cmap('Spectral')
 
-    plt.subplot(111)
-    plt.plot(gtposes[:,2],gtposes[:,0], linestyle='dashed',c='k')
-    plt.plot(estposes[:, 2], estposes[:, 0],c='#ff7f0e')
+    plt.subplot(111)  #for cam  
+    # plt.plot(gtposes[:,2],gtposes[:,0], linestyle='dashed',c='k') # z,x
+    # plt.plot(estposes[:, 2], estposes[:, 0],c='#ff7f0e')
+    # plt.xlabel('z (m)')
+    # plt.ylabel('x (m)')
+    # for ar glass imu
+    plt.plot(gtposes[:,0],gtposes[:,1], linestyle='dashed',c='k') # x,y
+    plt.plot(estposes[:, 0], estposes[:, 1],c='#ff7f0e')
     plt.xlabel('x (m)')
     plt.ylabel('y (m)')
-    plt.legend(['Ground Truth','Ours'])
+    plt.legend(['Ground Truth','DROID-SLAM'])
     plt.title(title)
 
     plt.axis('equal')    
@@ -58,7 +63,7 @@ class TartanAirEvaluator:
         est_traj = est_traj.astype(np.float64)
 
         ate_score, gt_ate_aligned, est_ate_aligned = self.ate_eval.evaluate(gt_traj, est_traj, scale)
-        # ate rmse m
+        # ate rmse m 画图
         plot_traj(np.matrix(gt_ate_aligned), np.matrix(est_ate_aligned), vis=False, savefigname="figures/%s.pdf"%title, title=title)
 
         est_ate_aligned = np.array(est_ate_aligned)

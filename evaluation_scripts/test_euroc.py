@@ -16,7 +16,23 @@ from droid import Droid
 
 import torch.nn.functional as F
 
+def fisheyerectify(K_l, d_l, K_r, d_r, T_Bl, T_Br, rawimage_size): #W,H
+    T_rl = np.linalg.inv(T_Br).dot(T_Bl)
+    R_rl = T_rl[0:3,0:3]
+    t_rl = T_rl[0:3,3]
+    # W,H ?
+    # R_l, R_r, P_l, P_r, Q= cv2.fisheye.stereoRectify(K_l, d_l[:4], K_r, d_r[:4], (rawimage_size[0], rawimage_size[1]), R_rl, t_rl,
+    # flags=cv2.fisheye.CALIB_ZERO_DISPARITY, newImageSize=(0, 0))
+    R_l, R_r, P_l, P_r, Q= cv2.stereoRectify(K_l, d_l, K_r, d_r, (rawimage_size[0], rawimage_size[1]), R_rl, t_rl)
+    # flags=cv2.CALIB_ZERO_DISPARITY, newImageSize=(0, 0))
 
+    T_l43 = np.vstack((R_l, np.array([0,0,0])))
+    T_l = np.hstack((T_l43, np.array([[0],[0],[0],[1]]))) #Trect_l
+    T_l_inv = np.linalg.inv(T_l) #Tl_rect
+    global T_Brect
+    T_Brect = T_Bl.dot(T_l_inv) # 矫正相机系 到 imu(gt)
+
+    return R_l, R_r, P_l, P_r, T_rl, T_Brect
 
 def show_image(image):
     image = image.permute(1, 2, 0).cpu().numpy()
@@ -46,6 +62,19 @@ def image_stream(datapath, image_size=[320, 512], stereo=False, stride=1):
     ]).reshape(3,3)
     
     P_r = np.array([435.2046959714599, 0, 367.4517211914062, -47.90639384423901, 0, 435.2046959714599, 252.2008514404297, 0, 0, 0, 1, 0]).reshape(3,4)
+    T_Bl = np.array([0.0148655429818, -0.999880929698, 0.00414029679422, -0.0216401454975,
+         0.999557249008, 0.0149672133247, 0.025715529948, -0.064676986768,
+        -0.0257744366974, 0.00375618835797, 0.999660727178, 0.00981073058949,
+         0.0, 0.0, 0.0, 1.0]).reshape(4,4) #用来变换gt
+    T_Br = np.array([0.0125552670891, -0.999755099723, 0.0182237714554, -0.0198435579556,
+         0.999598781151, 0.0130119051815, 0.0251588363115, 0.0453689425024,
+        -0.0253898008918, 0.0179005838253, 0.999517347078, 0.00786212447038,
+         0.0, 0.0, 0.0, 1.0]).reshape(4,4)
+    R_l1, R_r1, P_l1, P_r1, T_rl, T_Brect = fisheyerectify(K_l, d_l, K_r, d_r, T_Bl, T_Br,rawimage_size=(752, 480))
+    print("R_l1: \n",R_l1)
+    print("R_r1: \n",R_r1)
+    print("P_l1: \n",P_l1)
+    print("P_r1: \n",P_r1)
     map_r = cv2.initUndistortRectifyMap(K_r, d_r, R_r, P_r[:3,:3], (752, 480), cv2.CV_32F)
 
     intrinsics_vec = [435.2046959714599, 435.2046959714599, 367.4517211914062, 252.2008514404297]
@@ -85,7 +114,7 @@ if __name__ == '__main__':
     parser.add_argument("--image_size", default=[320,512])
     parser.add_argument("--disable_vis", action="store_true")
     parser.add_argument("--stereo", action="store_true")
-
+    parser.add_argument("--plot_curve", action="store_true")
     parser.add_argument("--beta", type=float, default=0.3)
     parser.add_argument("--filter_thresh", type=float, default=2.4)
     parser.add_argument("--warmup", type=int, default=15)

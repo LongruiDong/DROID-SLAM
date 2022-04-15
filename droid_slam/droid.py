@@ -109,8 +109,8 @@ class Droid:
         print("#" * 32)
         self.backend(12)
         
-        # torch.cuda.empty_cache()
-        # self.backend.onlyvis(steps=1) 
+        torch.cuda.empty_cache() #for vis
+        self.backend.onlyvis(steps=1, seq_name=self.args.seq_name) 
            
         camera_trajectory = self.traj_filler(stream)
         return camera_trajectory.inv().data.cpu().numpy()

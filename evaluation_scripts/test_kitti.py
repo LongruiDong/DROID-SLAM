@@ -128,7 +128,7 @@ if __name__ == '__main__':
                     # break
                     pass
         
-        # fill in non-keyframe poses + global BA #只在所有track和lba之后全局ba?
+        # fill in non-keyframe poses + global BA #只在所有track和lba之后全局ba? tx ty tz qw qx qy qz 
         traj_est = droid.terminate(image_stream(seqpath, intrinsics_vec=seq_intrinsics ,stereo=args.stereo))
 
         ### run evaluation ###
@@ -142,7 +142,7 @@ if __name__ == '__main__':
         evaluator = TartanAirEvaluator()
         gt_file = os.path.join(seqpath, "pose.txt")
         traj_ref_SE = np.loadtxt(gt_file, delimiter=' ') #(N,12)
-        traj_ref = np.array(SE_matrices2pos_quats(traj_ref_SE)) #得到 对应四元数格式的gt
+        traj_ref = np.array(SE_matrices2pos_quats(traj_ref_SE)) #得到 对应四元数格式的gt x y z
         results = evaluator.evaluate_one_trajectory(
                 traj_ref, traj_est, scale=True, title='KITTI '+seqid)
         print(results)

@@ -219,7 +219,7 @@ __global__ void projective_transform_kernel(
   // stereo frames
   if (ix == jx) {//按照论文，双目情况就在同顶点 左目与双目建立边
     if (thread_id == 0) {
-      tij[0] =  -0.1; //表示双目之间的位姿 理应就相差x方向的平移
+      tij[0] =  -0.079; //表示双目之间的位姿 理应就相差x方向的平移 为啥-0.1m  lsfb 0.079
       tij[1] =     0;
       tij[2] =     0;
       qij[0] =     0;
@@ -322,7 +322,7 @@ __global__ void projective_transform_kernel(
     Cii[block_id][k] = wu * Jz * Jz; //Cii(#e,48x64=3072)
     bz[block_id][k] = wu * ru * Jz;//这两个式子还待搞懂  g中和深度有关的分量？
 
-    if (ix == jx) wu = 0; //双目的情况
+    if (ix == jx) wu = 0; //双目的情况 上面的权重是0
     // 继续得到p'对位姿i的雅可比矩阵(2x6)的首行 因为 Ji和Jj 其实就差了负号 和 adj(Gji)
     adjSE3(tij, qij, Jj, Ji);
     for (int n=0; n<6; n++) Ji[n] *= -1; //加上负号
@@ -355,8 +355,8 @@ __global__ void projective_transform_kernel(
     Cii[block_id][k] += wv * Jz * Jz; //是输出
     bz[block_id][k] += wv * rv * Jz; //是输出
 
-    if (ix == jx) wv = 0;
-
+    if (ix == jx) wv = 0; //双目的边 上面的权重是0 会影响下面的 Hs vs Eij就全为0, 那为啥 Cii bz 不被设为0
+    //这样效果就是  应该是这条边梯度很大吧
     adjSE3(tij, qij, Jj, Ji);
     for (int n=0; n<6; n++) Ji[n] *= -1;
 

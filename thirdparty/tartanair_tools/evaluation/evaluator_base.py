@@ -39,7 +39,7 @@ class ATEEvaluator(object):
         error = np.sqrt(np.dot(trans_error,trans_error) / len(trans_error))# ATE RMSE
 
         # align two trajs 
-        est_SEs = pos_quats2SE_matrices(est_traj)
+        est_SEs = pos_quats2SE_matrices(est_traj) #需要是 xyzw
         T = np.eye(4) 
         T[:3,:3] = rot
         T[:3,3:] = trans 
@@ -48,7 +48,7 @@ class ATEEvaluator(object):
         for se in est_SEs:
             se[:3,3] = se[:3,3] * s
             se_new = T.dot(se)
-            se_new = SE2pos_quat(se_new)
+            se_new = SE2pos_quat(se_new) # 变为x y z w
             est_traj_aligned.append(se_new)
 
 

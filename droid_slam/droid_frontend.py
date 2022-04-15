@@ -11,7 +11,7 @@ class DroidFrontend:
     def __init__(self, net, video, args): #net: DroidNet()
         self.video = video
         self.update_op = net.update
-        self.graph = FactorGraph(video, net.update, max_factors=48) # 表示优化图结构， 用于能量项的帧间关系？
+        self.graph = FactorGraph(video, net.update, max_factors=48, seq = args.seq_name) # 表示优化图结构， 用于能量项的帧间关系？
 
         # local optimization window #局部优化窗口
         self.t0 = 0
@@ -48,7 +48,7 @@ class DroidFrontend:
         self.video.disps[self.t1-1] = torch.where(self.video.disps_sens[self.t1-1] > 0, 
            self.video.disps_sens[self.t1-1], self.video.disps[self.t1-1])
 
-        for itr in range(self.iters1):
+        for itr in range(self.iters1): #4次
             self.graph.update(None, None, use_inactive=True)
 
         # set initial pose for next frame

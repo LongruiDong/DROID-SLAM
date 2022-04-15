@@ -27,29 +27,11 @@ def show_image(image):
     cv2.waitKey(1)
 
 def fisheyerectify(K_l, d_l, K_r, d_r, T_Bl, T_Br, rawimage_size): #W,H
-    # T_Bl = np.array([9.9997329711914062e-01, 6.6418354399502277e-03,
-    #    -3.0394839122891426e-03, -9.8180193454027176e-03,
-    #    6.6309631802141666e-03, -9.9997162818908691e-01,
-    #    -3.5731517709791660e-03, 1.2429017573595047e-02,
-    #    -3.0631299596279860e-03, 3.5529017914086580e-03,
-    #    -9.9998897314071655e-01, -7.7026826329529285e-03, 0., 0., 0., 1.
-    #    ]).reshape(4,4) #用来变换gt
-    # T_Br = np.array([
-    #     9.9982339143753052e-01, 1.8695123493671417e-02,
-    #    1.9050934351980686e-03, 6.9406457245349884e-02,
-    #    1.8734551966190338e-02, -9.9955159425735474e-01,
-    #    -2.3359693586826324e-02, 1.3070842251181602e-02,
-    #    1.4675267739221454e-03, 2.3391259834170341e-02,
-    #    -9.9972528219223022e-01, -7.3286700062453747e-03, 0., 0., 0., 1.
-    # ]).reshape(4,4)
     T_rl = np.linalg.inv(T_Br).dot(T_Bl)
     R_rl = T_rl[0:3,0:3]
     t_rl = T_rl[0:3,3]
-    T_lr = np.linalg.inv(T_rl)
-    R_lr = T_lr[0:3,0:3]
-    t_lr = T_lr[0:3,3]
     # W,H ?
-    R_l, R_r, P_l, P_r, Q= cv2.fisheye.stereoRectify(K_l, d_l[:4], K_r, d_r[:4], (rawimage_size[0], rawimage_size[1]), R_lr, t_lr,
+    R_l, R_r, P_l, P_r, Q= cv2.fisheye.stereoRectify(K_l, d_l[:4], K_r, d_r[:4], (rawimage_size[0], rawimage_size[1]), R_rl, t_rl,
     flags=cv2.fisheye.CALIB_ZERO_DISPARITY, newImageSize=(0, 0))
 
     T_l43 = np.vstack((R_l, np.array([0,0,0])))
@@ -60,26 +42,10 @@ def fisheyerectify(K_l, d_l, K_r, d_r, T_Bl, T_Br, rawimage_size): #W,H
 
     return R_l, R_r, P_l, P_r, T_rl, T_Brect
 
-def undistort_fisheye(img_path,K,D,DIM,scale=1,imshow=False):
-    img = cv2.imread(img_path)
-    dim1 = img.shape[:2][::-1]  #dim1 is the dimension of input image to un-distort
-    assert dim1[0]/dim1[1] == DIM[0]/DIM[1], "Image to undistort needs to have same aspect ratio as the ones used in calibration"
-    if dim1[0]!=DIM[0]:
-        img = cv2.resize(img,DIM,interpolation=cv2.INTER_LINEAR)
-    Knew = K.copy()
-    # if scale:#change fov  这里pengzhen说可以s>1 之后尝试
-    #     Knew[(0,1), (0,1)] = scale * Knew[(0,1), (0,1)]
-    map1, map2 = cv2.fisheye.initUndistortRectifyMap(K, D, np.eye(3), Knew, DIM, cv2.CV_32FC1) #CV_32FC1 CV_16SC2
-    undistorted_img = cv2.remap(img, map1, map2, interpolation=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT) #BORDER_CONSTANT BORDER_TRANSPARENT  INTER_LINEAR INTER_CUBIC
-    # if imshow:
-    #     cv2.imshow("undistorted/", undistorted_img)
-    return undistorted_img
-
 def image_stream(datapath, image_size=[320, 512], stereo=False, stride=1): #.../glass
     """ image generator """
 
     tmproot = 'tmpvis' #保存处理后的图像
-    unroot = 'undistort'
     sename = datapath[-8:-6]
     tmpath = os.path.join(tmproot, sename)
     folder = os.path.exists(tmpath)
@@ -87,9 +53,6 @@ def image_stream(datapath, image_size=[320, 512], stereo=False, stride=1): #.../
         os.makedirs(tmpath)            #makedirs 创建文件时如果路径不存在会创建这个路径
         print("---  new folder...  ---")
         print("---  OK  ---")
-    distdir = os.path.join(unroot, sename)
-    if not os.path.exists(distdir):
-        os.makedirs(distdir)
 
     # 读取该数据下sensor.yaml
     skip_lines = 2
@@ -119,36 +82,38 @@ def image_stream(datapath, image_size=[320, 512], stereo=False, stride=1): #.../
     # d_l = np.array([-1.3631494865479999e-03, -7.9948184639614859e-04, 8.4645787044929904e-03, -4.0112405620408706e-03, 0.0]).reshape(5)
     # K_r = np.array([2.8965297624144807e+02, 0.0, 3.2409910815283644e+02, 0.0, 2.8985944343659531e+02, 2.0176534871317821e+02, 0.0, 0.0, 1.0]).reshape(3,3)
     # d_r = np.array([-1.7782802426685011e-02, 4.3753190194342768e-02, -4.6115411506519849e-02, 1.8216015142547858e-02, 0.0]).reshape(5)
-    print('\n')
-    print('K_l: \n',K_l)
-    print('K_r: \n',K_r)
-    print('d_l: \n', d_l)
-    print('d_r: \n', d_r)
-    print('T_Bl: \n', T_Bl)
-    print('T_Br: \n', T_Br)
+    # print('K_l: \n',K_l)
+    # print('K_r: \n',K_r)
+    # print('d_l: \n', d_l)
+    # print('d_l size: \n', d_l.shape)
+    # print('d_r: \n', d_r)
+    # print('d_r size: \n', d_r.shape)
 
-    T_rl = np.linalg.inv(T_Br).dot(T_Bl)
-    R_rl = T_rl[0:3,0:3]
-    t_rl = T_rl[0:3,3]
-    # T_lr = np.linalg.inv(T_rl)
-    # R_lr = T_lr[0:3,0:3]
-    # t_lr = T_lr[0:3,3]
-    # _, _, _, _, T_rl, _ = fisheyerectify(K_l, d_l, K_r, d_r, T_Bl, T_Br,rawimage_size=raw_size) #W,H
+    R_l, R_r, P_l, P_r, T_rl, T_Brect = fisheyerectify(K_l, d_l, K_r, d_r, T_Bl, T_Br,rawimage_size=raw_size) #W,H
+    # R_l, R_r, P_l, P_r, Q= cv2.fisheye.stereoRectify(K_l, d_l[:4], K_r, d_r[:4], (640, 400), R_rl, t_rl,
+    # flags=cv2.fisheye.CALIB_ZERO_DISPARITY, newImageSize=(640, 400))
+    # R_l = np.array([
+    #      0.999966347530033, -0.001422739138722922, 0.008079580483432283, 
+    #      0.001365741834644127, 0.9999741760894847, 0.007055629199258132, 
+    #     -0.008089410156878961, -0.007044357138835809, 0.9999424675829176
+    # ]).reshape(3,3) #这个参数？
+    # R_r = np.array([
+    #      0.9999633526194376, -0.003625811871560086, 0.007755443660172947, 
+    #      0.003680398547259526, 0.9999684752771629, -0.007035845251224894, 
+    #     -0.007729688520722713, 0.007064130529506649, 0.999945173484644
+    # ]).reshape(3,3)
     
+    # P_l = np.array([435.2046959714599, 0, 367.4517211914062, 0,  0, 435.2046959714599, 252.2008514404297, 0,  0, 0, 1, 0]).reshape(3,4)
+    # P_r = np.array([435.2046959714599, 0, 367.4517211914062, -47.90639384423901, 0, 435.2046959714599, 252.2008514404297, 0, 0, 0, 1, 0]).reshape(3,4)
     
-    # P_l = np.array([K_l[0,0], 0, K_l[0,2], 0,  0, K_l[1,1], K_l[1,2], 0,  0, 0, 1, 0]).reshape(3,4)
-    # P_r = np.array([K_r[0,0], 0, K_r[0,2], -47.90639384423901, 0, K_r[1,1], K_r[1,2], 0,  0, 0, 1, 0]).reshape(3,4)
+    map_l = cv2.fisheye.initUndistortRectifyMap(K_l, d_l[:4], R_l, P_l[:3,:3], (raw_size[0], raw_size[1]), cv2.CV_32F) #需要W,H
+    map_r = cv2.fisheye.initUndistortRectifyMap(K_r, d_r[:4], R_r, P_r[:3,:3], (raw_size[0], raw_size[1]), cv2.CV_32F)
 
-    R_l, R_r, P_l, P_r, _,_,_= cv2.stereoRectify(K_l, np.zeros(4), K_r, np.zeros(4), (raw_size[0], raw_size[1]), R_rl, t_rl,
-                                                 flags=cv2.CALIB_ZERO_DISPARITY, alpha=1, newImageSize=(raw_size[0], raw_size[1])) #为了不改变fov 就设为1  0就是去掉所有黑边
     intrinsics_vec = [P_l[0,0], P_l[1,1], P_l[0,2], P_l[1,2]] #？
-    map_l = cv2.initUndistortRectifyMap(K_l, np.zeros(5), R_l, P_l[:3,:3], (raw_size[0], raw_size[1]), cv2.CV_32FC1) #需要W,H [:3,:3]
-    map_r = cv2.initUndistortRectifyMap(K_r, np.zeros(5), R_r, P_r[:3,:3], (raw_size[0], raw_size[1]), cv2.CV_32FC1)
-    T_l43 = np.vstack((R_l, np.array([0,0,0])))
-    T_l = np.hstack((T_l43, np.array([[0],[0],[0],[1]]))) #Trect_l
-    T_l_inv = np.linalg.inv(T_l) #Tl_rect
-    global T_Brect
-    T_Brect = T_Bl.dot(T_l_inv) # 矫正相机系 到 imu(gt)
+    # T_l43 = np.vstack((R_l, np.array([0,0,0])))
+    # T_l = np.hstack(T_l43, np.array([0,0,0,1])) #Trect_l
+    # T_l_inv = np.linalg.inv(T_l) #Tl_rect
+    # T_Brect = T_Bl.dot(T_l_inv) # 矫正相机系 到 imu(gt)
     if stereo:
         print("T_rl: \n",T_rl)
         print("R_l: \n",R_l)
@@ -167,21 +132,15 @@ def image_stream(datapath, image_size=[320, 512], stereo=False, stride=1): #.../
     for t, (imgL, imgR) in enumerate(zip(images_left, images_right)):
         if stereo and not os.path.isfile(imgR):
             continue
-        tstamp = float(imgL.split('/')[-1][:-4]) 
-        #测试 先去畸变 得到正常双目 再正常双目校正
-        imgl_un = undistort_fisheye(imgL,K_l,d_l[:4],raw_size,scale=1,imshow=False) 
-        imgr_un = undistort_fisheye(imgR,K_r,d_r[:4],raw_size,scale=1,imshow=False) 
-             
-        images = [cv2.remap(imgl_un, map_l[0], map_l[1], interpolation=cv2.INTER_LINEAR)] #(400,640,3)
+        tstamp = float(imgL.split('/')[-1][:-4])        
+        images = [cv2.remap(cv2.imread(imgL), map_l[0], map_l[1], interpolation=cv2.INTER_LINEAR)] #(400,640,3)
 
         # print("an img size : ", images[0].shape)
         if stereo:
-            distortst = np.hstack((imgl_un, imgr_un))
-            images += [cv2.remap(imgr_un, map_r[0], map_r[1], interpolation=cv2.INTER_LINEAR)]
+            images += [cv2.remap(cv2.imread(imgR), map_r[0], map_r[1], interpolation=cv2.INTER_LINEAR)]
             testimgs = np.hstack((images[0], images[1]))
             testfile = str(tstamp)+'.png'
             cv2.imwrite(os.path.join(tmpath,testfile), testimgs)
-            cv2.imwrite(os.path.join(distdir,testfile), distortst)
         
         images = torch.from_numpy(np.stack(images, 0))
         images = images.permute(0, 3, 1, 2).to("cuda:0", dtype=torch.float32)
@@ -224,7 +183,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--datapath", help="path to euroc sequence") # .../glass 
     parser.add_argument("--gt", help="path to gt file") #... gba_pose.csv
-    parser.add_argument("--seq_name", required=True, help="seq_name", default = "glassst/atrium/A0") #用来保存中间depth flow等可视化结果
     parser.add_argument("--weights", default="droid.pth")
     parser.add_argument("--buffer", type=int, default=14000) # 512 14000
     parser.add_argument("--image_size", default=[320,512]) # raw size glass W 640 H 400
@@ -237,7 +195,7 @@ if __name__ == '__main__':
     parser.add_argument("--warmup", type=int, default=15)
     parser.add_argument("--keyframe_thresh", type=float, default=3.5)
     parser.add_argument("--frontend_thresh", type=float, default=17.5)
-    parser.add_argument("--frontend_window", type=int, default=20) #前端局部 窗口 帧数目
+    parser.add_argument("--frontend_window", type=int, default=20)
     parser.add_argument("--frontend_radius", type=int, default=2)
     parser.add_argument("--frontend_nms", type=int, default=1)
 
@@ -269,15 +227,11 @@ if __name__ == '__main__':
     ### run evaluation ###
 
     import evo
-    from evo.core.trajectory import PoseTrajectory3D, PosePath3D
+    from evo.core.trajectory import PoseTrajectory3D
     from evo.tools import file_interface
     from evo.core import sync
     import evo.main_ape as main_ape
     from evo.core.metrics import PoseRelation
-    from evo.core import trajectory
-    from evo.core import metrics
-    from evo.core.metrics import StatisticsType
-    import evo.core.geometry as geometry
     seqname = args.datapath.split('/')[-3]+'-'+args.datapath.split('/')[-2]
     images_list = sorted(glob.glob(os.path.join(args.datapath, 'cam0/data/*.png')))
     # tstamps = [float(x.split('/')[-1][:-4])/1000000000.0 for x in images_list] # ns->s !
@@ -285,23 +239,16 @@ if __name__ == '__main__':
     imgtimef = os.path.join(args.datapath, 'cam0/data.csv')
     imgtime = np.loadtxt(imgtimef, delimiter=',', usecols=[0])/1000000000.0 # s (N,)
     traj_imu0 = traj_imu #arr w x y z
-    tstamparr = imgtime.reshape(-1, 1) #*1000000000.0 #转列向量  ns  对于ape对齐 用s
+    tstamparr = imgtime.reshape(-1, 1)*1000000000.0 #转列向量  ns
     traj_imu_time = np.hstack((tstamparr, traj_imu0))
     # 保存结果
     outquatdir = 'result'
     folder = os.path.exists(outquatdir)
     if not folder:                   #判断是否存在文件夹如果不存在则创建为文件夹
         os.makedirs(outquatdir)
-    
-    newseqname = seqname
-    if args.stereo: #表示双目glass for pose result.csv   figure/traj  ate.pdf
-        newseqname = seqname+'-st'
-    
-    #     np.savetxt(os.path.join(outquatdir,seqname+'-st.csv'),traj_imu_time,delimiter=' ')
-    # else:
-    np.savetxt(os.path.join(outquatdir,newseqname+'.csv'),traj_imu_time,delimiter=' ') # 还有time也保存s  对于ape 用空格
+    np.savetxt(os.path.join(outquatdir,seqname+'.csv'),traj_imu_time,delimiter=',') # 还有time也保存
     traj_imu = PoseTrajectory3D(
-        positions_xyz=1.0 * traj_imu[:,:3],
+        positions_xyz=1.10 * traj_imu[:,:3],
         orientations_quat_wxyz=traj_imu[:,3:], # w x y z
         timestamps=imgtime) #s np.array(tstamps)
 
@@ -322,47 +269,15 @@ if __name__ == '__main__':
     traj_imu_1 = np.hstack((traj_imu_xyz, traj_imu_xyzw))
     # usually stereo should not be scale corrected, but we are comparing monocular and stereo here
     results0 = evaluator.evaluate_one_trajectory(traj_ref_1, traj_imu_1, #也会画轨迹
-                scale=True, title=newseqname) #/home/dlr/anaconda3/envs/droidenv5/lib/python3.9/site-packages/numpy/core/fromnumeric.py:3440: RuntimeWarning: Mean of empty slice.
-#   return _methods._mean(a, axis=axis, dtype=dtype,
-# /home/dlr/anaconda3/envs/droidenv5/lib/python3.9/site-packages/numpy/core/_methods.py:189: RuntimeWarning: invalid value encountered in double_scalars
-#   ret = ret.dtype.type(ret / rcount)
+                scale=True, title=seqname)
     print(results0)
     ate_list = [] # save ATE rmse
     ate_list.append(results0["ate_score"])
     
-    traj_imu_se = PoseTrajectory3D(
-        positions_xyz=traj_imu.positions_xyz,
-        orientations_quat_wxyz=traj_imu.orientations_quat_wxyz, # w x y z
-        timestamps=traj_imu.timestamps) #s
-    traj_imu_sim = PoseTrajectory3D(
-        positions_xyz=traj_imu.positions_xyz,
-        orientations_quat_wxyz=traj_imu.orientations_quat_wxyz, # w x y z
-        timestamps=traj_imu.timestamps) #s 
-    resultsim3 = main_ape.ape(traj_ref, traj_imu_sim, est_name='traj',  #-as
+    result = main_ape.ape(traj_ref, traj_imu, est_name='traj', 
         pose_relation=PoseRelation.translation_part, align=True, correct_scale=True)
-    print('SIM3-----\n',resultsim3)
-    
-    # #from pengzhen
-    # traj_ape_kf = 
-    # traj_imu.align(traj_ref, False, False)
-    # traj_ape_kf_sim3 
-    # r_a, t_a, s = traj_imu.align(traj_ref, True, False)
-    
-    # ape_metric2 = metrics.APE()
-    # data_ape2 = (traj_ref, traj_ape_kf)
-    # ape_metric2.process_data(data_ape2)
-    # ape2 = ape_metric2.get_statistic(StatisticsType.rmse)
 
-    # ape_metric_sim = metrics.APE()
-    # data_ape_sim = (traj_ref, traj_ape_kf_sim3)
-    # ape_metric_sim.process_data(data_ape_sim)
-    # ape2_sim3 = ape_metric_sim.get_statistic(StatisticsType.rmse)
-    
-    r_a, t_a, s_KF = geometry.umeyama_alignment(traj_imu.positions_xyz.T, traj_ref.positions_xyz.T, True)
-    print('scale-----\n',s_KF)
-    resultse3 = main_ape.ape(traj_ref, traj_imu_se, est_name='trajse',  #-a
-        pose_relation=PoseRelation.translation_part, align=True, correct_scale=False)
-    print('SE3-----\n',resultse3)
+    print(result)
     
     if args.plot_curve:
         import matplotlib.pyplot as plt
@@ -374,7 +289,7 @@ if __name__ == '__main__':
         plt.xlabel("ATE [m]")
         plt.ylabel("% runs")
         # save ate 的线图
-        plt.savefig("figures/%s_ATE.pdf"%newseqname)
+        plt.savefig("figures/%s_ATE.pdf"%seqname)
         # plt.show()
         
 
