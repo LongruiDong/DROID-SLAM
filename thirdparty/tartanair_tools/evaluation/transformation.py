@@ -136,6 +136,17 @@ def pos_quat2SE(quat_data):
     SE = np.array(SE[0:3,:]).reshape(1,12)
     return SE
 
+def pos_quat2SE_matrice(quat_data):
+    """ t wxyz to SE 4X4
+
+    """
+    SO = R.from_quat(quat_data[3:7]).as_matrix() #from_quat (x,y,z,w)
+    SE = np.matrix(np.eye(4))
+    SE[0:3,0:3] = np.matrix(SO)
+    SE[0:3,3]   = np.matrix(quat_data[0:3]).T
+    SEarr = np.array(SE)
+    return SEarr
+
 
 def pos_quats2SEs(quat_datas):
     data_len = quat_datas.shape[0]
