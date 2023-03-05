@@ -1,0 +1,624 @@
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0568_00
+len: 	 1651
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0568_01
+len: 	 1352
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0568_02
+len: 	 1409
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0304_00
+len: 	 1773
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0488_00
+len: 	 598
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0488_01
+len: 	 1096
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0412_00
+len: 	 2365
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0412_01
+len: 	 1334
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0217_00
+len: 	 1244
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0019_00
+len: 	 579
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0019_01
+len: 	 630
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0414_00
+len: 	 1161
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0575_00
+len: 	 2933
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0575_01
+len: 	 3052
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0575_02
+len: 	 3005
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0426_00
+len: 	 2301
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0426_01
+len: 	 1702
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0426_02
+len: 	 1504
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0426_03
+len: 	 1243
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0549_00
+len: 	 830
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0549_01
+len: 	 1178
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0578_00
+len: 	 1484
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0578_01
+len: 	 1208
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0578_02
+len: 	 1165
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0665_00
+len: 	 1036
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0665_01
+len: 	 1011
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0050_00
+len: 	 4652
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0050_01
+len: 	 3711
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0050_02
+len: 	 4379
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0257_00
+len: 	 1646
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0025_00
+len: 	 1945
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0025_01
+len: 	 1781
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0025_02
+len: 	 1507
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0583_00
+len: 	 1977
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0583_01
+len: 	 1568
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0583_02
+len: 	 1650
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0701_00
+len: 	 1011
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0701_01
+len: 	 1060
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0701_02
+len: 	 1244
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0580_00
+len: 	 4764
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0580_01
+len: 	 3821
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0565_00
+len: 	 1065
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0169_00
+len: 	 2034
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0169_01
+len: 	 1565
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0655_00
+len: 	 1107
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0655_01
+len: 	 928
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0655_02
+len: 	 706
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0063_00
+len: 	 831
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0221_00
+len: 	 977
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0221_01
+len: 	 781
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0591_00
+len: 	 1724
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0591_01
+len: 	 1724
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0591_02
+len: 	 2337
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0678_00
+len: 	 2449
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0678_01
+len: 	 2326
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0678_02
+len: 	 2286
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0462_00
+len: 	 1140
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0427_00
+len: 	 1320
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0595_00
+len: 	 751
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0193_00
+len: 	 715
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0193_01
+len: 	 536
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0164_00
+len: 	 1882
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0164_01
+len: 	 825
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0164_02
+len: 	 1203
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0164_03
+len: 	 1115
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0598_00
+len: 	 1001
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0598_01
+len: 	 854
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0598_02
+len: 	 1607
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0599_00
+len: 	 1890
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0599_01
+len: 	 2242
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0599_02
+len: 	 2476
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0328_00
+len: 	 1411
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0300_00
+len: 	 1747
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0300_01
+len: 	 1746
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0354_00
+len: 	 1126
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0458_00
+len: 	 1985
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0458_01
+len: 	 2289
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0423_00
+len: 	 769
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0423_01
+len: 	 619
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0423_02
+len: 	 855
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0307_00
+len: 	 2048
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0307_01
+len: 	 3269
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0307_02
+len: 	 2091
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0606_00
+len: 	 2492
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0606_01
+len: 	 2832
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0606_02
+len: 	 2522
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0432_00
+len: 	 519
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0432_01
+len: 	 305
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0608_00
+len: 	 3388
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0608_01
+len: 	 2873
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0608_02
+len: 	 2935
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0651_00
+len: 	 1037
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0651_01
+len: 	 846
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0651_02
+len: 	 848
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0430_00
+len: 	 2305
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0430_01
+len: 	 1571
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0689_00
+len: 	 864
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0357_00
+len: 	 910
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0357_01
+len: 	 907
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0574_00
+len: 	 1024
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0574_01
+len: 	 1685
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0574_02
+len: 	 1598
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0329_00
+len: 	 1559
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0329_01
+len: 	 1124
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0329_02
+len: 	 1362
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0153_00
+len: 	 582
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0153_01
+len: 	 726
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0616_00
+len: 	 3037
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0616_01
+len: 	 3329
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0671_00
+len: 	 780
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0671_01
+len: 	 630
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0618_00
+len: 	 891
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0382_00
+len: 	 1130
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0382_01
+len: 	 803
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0490_00
+len: 	 1284
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0621_00
+len: 	 2675
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0607_00
+len: 	 992
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0607_01
+len: 	 571
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0149_00
+len: 	 1409
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0695_00
+len: 	 1820
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0695_01
+len: 	 2135
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0695_02
+len: 	 2089
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0695_03
+len: 	 2889
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0389_00
+len: 	 1415
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0377_00
+len: 	 903
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0377_01
+len: 	 1031
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0377_02
+len: 	 760
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0342_00
+len: 	 929
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0139_00
+len: 	 1355
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0629_00
+len: 	 2743
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0629_01
+len: 	 2669
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0629_02
+len: 	 1635
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0496_00
+len: 	 1336
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0633_00
+len: 	 1596
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0633_01
+len: 	 1424
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0518_00
+len: 	 1463
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0652_00
+len: 	 1439
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0406_00
+len: 	 1414
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0406_01
+len: 	 1229
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0406_02
+len: 	 1209
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0144_00
+len: 	 1437
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0144_01
+len: 	 1356
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0494_00
+len: 	 741
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0278_00
+len: 	 792
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0278_01
+len: 	 715
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0316_00
+len: 	 770
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0609_00
+len: 	 1091
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0609_01
+len: 	 1095
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0609_02
+len: 	 1706
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0609_03
+len: 	 690
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0084_00
+len: 	 1972
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0084_01
+len: 	 1652
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0084_02
+len: 	 1121
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0696_00
+len: 	 1300
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0696_01
+len: 	 1914
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0696_02
+len: 	 1565
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0351_00
+len: 	 1462
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0351_01
+len: 	 856
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0643_00
+len: 	 1934
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0644_00
+len: 	 2007
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0645_00
+len: 	 4503
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0645_01
+len: 	 5230
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0645_02
+len: 	 2903
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0081_00
+len: 	 295
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0081_01
+len: 	 1452
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0081_02
+len: 	 1252
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0647_00
+len: 	 1094
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0647_01
+len: 	 1185
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0535_00
+len: 	 684
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0353_00
+len: 	 2981
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0353_01
+len: 	 2336
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0353_02
+len: 	 2135
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0559_00
+len: 	 575
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0559_01
+len: 	 449
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0559_02
+len: 	 713
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0593_00
+len: 	 2297
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0593_01
+len: 	 1203
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0246_00
+len: 	 2958
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0653_00
+len: 	 3879
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0653_01
+len: 	 4783
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0064_00
+len: 	 1205
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0064_01
+len: 	 808
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0356_00
+len: 	 1360
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0356_01
+len: 	 1283
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0356_02
+len: 	 852
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0030_00
+len: 	 2498
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0030_01
+len: 	 1648
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0030_02
+len: 	 1922
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0222_00
+len: 	 5422
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0222_01
+len: 	 4182
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0338_00
+len: 	 804
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0338_01
+len: 	 780
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0338_02
+len: 	 449
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0378_00
+len: 	 1892
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0378_01
+len: 	 2305
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0378_02
+len: 	 1980
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0660_00
+len: 	 1041
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0553_00
+len: 	 1501
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0553_01
+len: 	 1403
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0553_02
+len: 	 1566
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0527_00
+len: 	 673
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0663_00
+len: 	 2946
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0663_01
+len: 	 3582
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0663_02
+len: 	 2953
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0664_00
+len: 	 1439
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0664_01
+len: 	 1395
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0664_02
+len: 	 1243
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0334_00
+len: 	 1185
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0334_01
+len: 	 1054
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0334_02
+len: 	 1054
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0046_00
+len: 	 2481
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0046_01
+len: 	 2469
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0046_02
+len: 	 2502
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0203_00
+len: 	 1459
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0203_01
+len: 	 1466
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0203_02
+len: 	 2093
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0088_00
+len: 	 1095
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0088_01
+len: 	 1066
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0088_02
+len: 	 2210
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0088_03
+len: 	 1597
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0086_00
+len: 	 1428
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0086_01
+len: 	 1369
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0086_02
+len: 	 1268
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0670_00
+len: 	 3028
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0670_01
+len: 	 3560
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0256_00
+len: 	 1556
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0256_01
+len: 	 1795
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0256_02
+len: 	 1178
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0249_00
+len: 	 2734
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0441_00
+len: 	 766
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0658_00
+len: 	 547
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0704_00
+len: 	 2409
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0704_01
+len: 	 1789
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0187_00
+len: 	 2267
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0187_01
+len: 	 1829
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0131_00
+len: 	 1079
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0131_01
+len: 	 1122
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0131_02
+len: 	 811
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0207_00
+len: 	 1988
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0207_01
+len: 	 1930
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0207_02
+len: 	 2593
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0461_00
+len: 	 520
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0011_00
+len: 	 2374
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0011_01
+len: 	 2759
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0343_00
+len: 	 1233
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0251_00
+len: 	 1542
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0077_00
+len: 	 604
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0077_01
+len: 	 935
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0684_00
+len: 	 870
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0684_01
+len: 	 537
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0550_00
+len: 	 3915
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0686_00
+len: 	 1523
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0686_01
+len: 	 1310
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0686_02
+len: 	 1275
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0208_00
+len: 	 2389
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0500_00
+len: 	 2182
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0500_01
+len: 	 1647
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0552_00
+len: 	 889
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0552_01
+len: 	 607
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0648_00
+len: 	 4187
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0648_01
+len: 	 3911
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0435_00
+len: 	 3273
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0435_01
+len: 	 3242
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0435_02
+len: 	 1617 
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0435_03
+len: 	 1809
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0690_00
+len: 	 900
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0690_01
+len: 	 796
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0693_00
+len: 	 1732
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0693_01
+len: 	 1779
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0693_02
+len: 	 1610
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0700_00
+len: 	 4582
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0700_01
+len: 	 4133
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0700_02
+len: 	 3664
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0699_00
+len: 	 2197
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0231_00
+len: 	 4439
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0231_01
+len: 	 4341
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0231_02
+len: 	 3121
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0697_00
+len: 	 2875
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0697_01
+len: 	 3090
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0697_02
+len: 	 2900
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0697_03
+len: 	 2704
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0474_00
+len: 	 1631
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0474_01
+len: 	 2110
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0474_02
+len: 	 2446
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0474_03
+len: 	 3057
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0474_04
+len: 	 848
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0474_05
+len: 	 3083
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0355_00
+len: 	 1141
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0355_01
+len: 	 984
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0146_00
+len: 	 1407
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0146_01
+len: 	 1139
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0146_02
+len: 	 1422
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0196_00
+len: 	 1920
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0702_00
+len: 	 836
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0702_01
+len: 	 767
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0702_02
+len: 	 719
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0314_00
+len: 	 928
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0277_00
+len: 	 1150
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0277_01
+len: 	 891
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0277_02
+len: 	 861
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0095_00
+len: 	 1655
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0095_01
+len: 	 1578
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0015_00
+len: 	 1971
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0100_00
+len: 	 1016
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0100_01
+len: 	 1120
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0100_02
+len: 	 990
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0558_00
+len: 	 707
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0558_01
+len: 	 1553
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0558_02
+len: 	 1754
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0685_00
+len: 	 1958
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0685_01
+len: 	 1849
+eval on seq:  /mnt/lustre/share_data/scannet/public_datalist_185/scans/scene0685_02
+len: 	 3263

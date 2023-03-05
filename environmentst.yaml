@@ -1,0 +1,33 @@
+name: droidenv5
+channels:
+#  - rusty1s
+  - pyg
+  - pytorch
+  - pytorch-lts
+  - open3d-admin
+  - pytorch3d
+#  - nvidia
+  - conda-forge
+  - msys2
+  - bioconda
+  - menpo
+  - simpleitk
+  - fvcore
+  - iopath
+  - bottler
+  - aihabitat
+  - defaults
+dependencies:
+  - pytorch-scatter
+  - torchaudio
+  - torchvision
+  - open3d
+  - pytorch=1.10
+  - cudatoolkit=11.3
+  - tensorboard
+  - scipy
+  - opencv
+  - tqdm
+  - suitesparse
+  - matplotlib
+  - pyyaml
