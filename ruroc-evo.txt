@@ -1,0 +1,1089 @@
+evo: MH_01_easy--------------------------------------------------------------------------------
+Loaded 3638 stamps and poses from: data/eurocgt/MH_01_easy.txt
+Loaded 3673 stamps and poses from: result/euroc/MH_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 3629 of max. 3638 possible matching timestamps between...
+	data/eurocgt/MH_01_easy.txt
+and:	result/euroc/MH_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.33118786  0.27819442 -0.90162213]
+ [ 0.94288824 -0.13375535  0.30507586]
+ [-0.03572638 -0.95116632 -0.30660439]]
+Translation of alignment:
+[ 4.68036602 -1.84474899  0.939461  ]
+Scale correction: 1.0436083245544838
+--------------------------------------------------------------------------------
+Compared 3629 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.035028
+      mean	0.014475
+    median	0.012804
+       min	0.000695
+      rmse	0.015869
+       sse	0.913876
+       std	0.006505
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_01_easy-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 3638 stamps and poses from: data/eurocgt/MH_01_easy.txt
+Loaded 3673 stamps and poses from: result/euroc/MH_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 3629 of max. 3638 possible matching timestamps between...
+	data/eurocgt/MH_01_easy.txt
+and:	result/euroc/MH_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.33118786  0.27819442 -0.90162213]
+ [ 0.94288824 -0.13375535  0.30507586]
+ [-0.03572638 -0.95116632 -0.30660439]]
+Translation of alignment:
+[ 4.57427803 -1.65612878  0.91009325]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 3629 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.332759
+      mean	0.166875
+    median	0.186708
+       min	0.039716
+      rmse	0.181350
+       sse	119.349480
+       std	0.070996
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_01_easy-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 3638 stamps and poses from: data/eurocgt/MH_01_easy.txt
+Loaded 3673 stamps and poses from: result/euroc/MH_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 3629 of max. 3638 possible matching timestamps between...
+	data/eurocgt/MH_01_easy.txt
+and:	result/euroc/MH_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 3629 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	17.363358
+      mean	7.699059
+    median	5.546299
+       min	2.219292
+      rmse	8.820485
+       sse	282339.685022
+       std	4.304120
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_01_easy-ape-na.pdf
+evo: MH_02_easy--------------------------------------------------------------------------------
+Loaded 2999 stamps and poses from: data/eurocgt/MH_02_easy.txt
+Loaded 3030 stamps and poses from: result/euroc/MH_02_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2993 of max. 2999 possible matching timestamps between...
+	data/eurocgt/MH_02_easy.txt
+and:	result/euroc/MH_02_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.20635172  0.27187776 -0.93994758]
+ [ 0.9765469  -0.11754413  0.18038718]
+ [-0.06144206 -0.9551261  -0.28975682]]
+Translation of alignment:
+[ 4.58846526 -1.9839622   0.55850452]
+Scale correction: 1.038163729556123
+--------------------------------------------------------------------------------
+Compared 2993 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.035491
+      mean	0.014863
+    median	0.013391
+       min	0.001209
+      rmse	0.016196
+       sse	0.785116
+       std	0.006436
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_02_easy-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2999 stamps and poses from: data/eurocgt/MH_02_easy.txt
+Loaded 3030 stamps and poses from: result/euroc/MH_02_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2993 of max. 2999 possible matching timestamps between...
+	data/eurocgt/MH_02_easy.txt
+and:	result/euroc/MH_02_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.20635172  0.27187776 -0.93994758]
+ [ 0.9765469  -0.11754413  0.18038718]
+ [-0.06144206 -0.9551261  -0.28975682]]
+Translation of alignment:
+[ 4.48235074 -1.80219254  0.55040699]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2993 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.309595
+      mean	0.156580
+    median	0.185681
+       min	0.007185
+      rmse	0.172102
+       sse	88.649464
+       std	0.071426
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_02_easy-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2999 stamps and poses from: data/eurocgt/MH_02_easy.txt
+Loaded 3030 stamps and poses from: result/euroc/MH_02_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2993 of max. 2999 possible matching timestamps between...
+	data/eurocgt/MH_02_easy.txt
+and:	result/euroc/MH_02_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2993 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	19.193958
+      mean	8.556197
+    median	6.134354
+       min	1.962314
+      rmse	9.822561
+       sse	288772.727532
+       std	4.824333
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_02_easy-ape-na.pdf
+evo: MH_03_medium--------------------------------------------------------------------------------
+Loaded 2631 stamps and poses from: data/eurocgt/MH_03_medium.txt
+Loaded 2699 stamps and poses from: result/euroc/MH_03_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2631 of max. 2631 possible matching timestamps between...
+	data/eurocgt/MH_03_medium.txt
+and:	result/euroc/MH_03_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.30564172  0.22077161 -0.92619816]
+ [ 0.95021066 -0.13272362  0.28192931]
+ [-0.06068639 -0.96625273 -0.25034541]]
+Translation of alignment:
+[ 4.60653902 -1.86359923  0.56093458]
+Scale correction: 1.040730696737766
+--------------------------------------------------------------------------------
+Compared 2631 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.103542
+      mean	0.019571
+    median	0.016565
+       min	0.000523
+      rmse	0.022742
+       sse	1.360765
+       std	0.011583
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_03_medium-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2631 stamps and poses from: data/eurocgt/MH_03_medium.txt
+Loaded 2699 stamps and poses from: result/euroc/MH_03_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2631 of max. 2631 possible matching timestamps between...
+	data/eurocgt/MH_03_medium.txt
+and:	result/euroc/MH_03_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.30564172  0.22077161 -0.92619816]
+ [ 0.95021066 -0.13272362  0.28192931]
+ [-0.06068639 -0.96625273 -0.25034541]]
+Translation of alignment:
+[ 4.66706338 -1.76044654  0.55792153]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2631 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.378013
+      mean	0.126828
+    median	0.106082
+       min	0.024695
+      rmse	0.142299
+       sse	53.275431
+       std	0.064528
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_03_medium-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2631 stamps and poses from: data/eurocgt/MH_03_medium.txt
+Loaded 2699 stamps and poses from: result/euroc/MH_03_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2631 of max. 2631 possible matching timestamps between...
+	data/eurocgt/MH_03_medium.txt
+and:	result/euroc/MH_03_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2631 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	12.956374
+      mean	5.368983
+    median	4.897977
+       min	2.247011
+      rmse	5.920493
+       sse	92222.448874
+       std	2.495249
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_03_medium-ape-na.pdf
+evo: MH_04_difficult--------------------------------------------------------------------------------
+Loaded 1976 stamps and poses from: data/eurocgt/MH_04_difficult.txt
+Loaded 2025 stamps and poses from: result/euroc/MH_04_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1973 of max. 1976 possible matching timestamps between...
+	data/eurocgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.77935154 -0.25082043  0.57419533]
+ [-0.62658521 -0.31411297  0.71324892]
+ [ 0.0014648  -0.91565395 -0.4019648 ]]
+Translation of alignment:
+[ 4.60619423 -1.69833226  0.54070942]
+Scale correction: 1.0380018677561245
+--------------------------------------------------------------------------------
+Compared 1973 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.228031
+      mean	0.049945
+    median	0.040242
+       min	0.009408
+      rmse	0.056964
+       sse	6.402226
+       std	0.027393
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 1976 stamps and poses from: data/eurocgt/MH_04_difficult.txt
+Loaded 2025 stamps and poses from: result/euroc/MH_04_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1973 of max. 1976 possible matching timestamps between...
+	data/eurocgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.77935154 -0.25082043  0.57419533]
+ [-0.62658521 -0.31411297  0.71324892]
+ [ 0.0014648  -0.91565395 -0.4019648 ]]
+Translation of alignment:
+[ 4.66405817 -1.57530636  0.5839113 ]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1973 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.440637
+      mean	0.230388
+    median	0.190072
+       min	0.039691
+      rmse	0.256342
+       sse	129.648606
+       std	0.112395
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 1976 stamps and poses from: data/eurocgt/MH_04_difficult.txt
+Loaded 2025 stamps and poses from: result/euroc/MH_04_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1973 of max. 1976 possible matching timestamps between...
+	data/eurocgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 1973 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	23.944415
+      mean	9.380337
+    median	7.614101
+       min	4.911038
+      rmse	10.731483
+       sse	227220.007936
+       std	5.212868
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-ape-na.pdf
+evo: MH_05_difficult--------------------------------------------------------------------------------
+Loaded 2221 stamps and poses from: data/eurocgt/MH_05_difficult.txt
+Loaded 2264 stamps and poses from: result/euroc/MH_05_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2216 of max. 2221 possible matching timestamps between...
+	data/eurocgt/MH_05_difficult.txt
+and:	result/euroc/MH_05_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.75287457 -0.249227    0.60915169]
+ [-0.65813943 -0.29308121  0.69350984]
+ [ 0.00568954 -0.92303267 -0.38467951]]
+Translation of alignment:
+[ 4.37934286 -1.61537031  0.54199352]
+Scale correction: 1.033655716394353
+--------------------------------------------------------------------------------
+Compared 2216 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.145884
+      mean	0.048202
+    median	0.042484
+       min	0.000695
+      rmse	0.053817
+       sse	6.418165
+       std	0.023934
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_05_difficult-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2221 stamps and poses from: data/eurocgt/MH_05_difficult.txt
+Loaded 2264 stamps and poses from: result/euroc/MH_05_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2216 of max. 2221 possible matching timestamps between...
+	data/eurocgt/MH_05_difficult.txt
+and:	result/euroc/MH_05_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.75287457 -0.249227    0.60915169]
+ [-0.65813943 -0.29308121  0.69350984]
+ [ 0.00568954 -0.92303267 -0.38467951]]
+Translation of alignment:
+[ 4.44063428 -1.49740644  0.57776004]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2216 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.410648
+      mean	0.209444
+    median	0.178373
+       min	0.028459
+      rmse	0.230486
+       sse	117.721899
+       std	0.096211
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_05_difficult-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2221 stamps and poses from: data/eurocgt/MH_05_difficult.txt
+Loaded 2264 stamps and poses from: result/euroc/MH_05_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2216 of max. 2221 possible matching timestamps between...
+	data/eurocgt/MH_05_difficult.txt
+and:	result/euroc/MH_05_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2216 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	23.018824
+      mean	9.805749
+    median	7.913146
+       min	4.588528
+      rmse	11.149005
+       sse	275449.495681
+       std	5.305431
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_05_difficult-ape-na.pdf
+evo: V1_01_easy--------------------------------------------------------------------------------
+Loaded 2871 stamps and poses from: data/eurocgt/V1_01_easy.txt
+Loaded 2903 stamps and poses from: result/euroc/V1_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2862 of max. 2871 possible matching timestamps between...
+	data/eurocgt/V1_01_easy.txt
+and:	result/euroc/V1_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.24290146 -0.36080286  0.90045554]
+ [-0.9698657  -0.10846923  0.21816267]
+ [ 0.018958   -0.92631297 -0.37627765]]
+Translation of alignment:
+[0.84556568 2.22324091 0.9313591 ]
+Scale correction: 1.0076605925495281
+--------------------------------------------------------------------------------
+Compared 2862 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.066932
+      mean	0.034604
+    median	0.031508
+       min	0.012314
+      rmse	0.036852
+       sse	3.886746
+       std	0.012674
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_01_easy-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2871 stamps and poses from: data/eurocgt/V1_01_easy.txt
+Loaded 2903 stamps and poses from: result/euroc/V1_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2862 of max. 2871 possible matching timestamps between...
+	data/eurocgt/V1_01_easy.txt
+and:	result/euroc/V1_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.24290146 -0.36080286  0.90045554]
+ [-0.9698657  -0.10846923  0.21816267]
+ [ 0.018958   -0.92631297 -0.37627765]]
+Translation of alignment:
+[0.84220142 2.20886306 0.93490044]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2862 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.077343
+      mean	0.036461
+    median	0.036033
+       min	0.001978
+      rmse	0.039463
+       sse	4.457147
+       std	0.015099
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_01_easy-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2871 stamps and poses from: data/eurocgt/V1_01_easy.txt
+Loaded 2903 stamps and poses from: result/euroc/V1_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2862 of max. 2871 possible matching timestamps between...
+	data/eurocgt/V1_01_easy.txt
+and:	result/euroc/V1_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2862 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	8.207679
+      mean	3.767031
+    median	3.649704
+       min	1.393081
+      rmse	3.984131
+       sse	45429.375655
+       std	1.297219
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_01_easy-ape-na.pdf
+evo: V1_02_medium--------------------------------------------------------------------------------
+Loaded 1671 stamps and poses from: data/eurocgt/V1_02_medium.txt
+Loaded 1710 stamps and poses from: result/euroc/V1_02_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1671 of max. 1671 possible matching timestamps between...
+	data/eurocgt/V1_02_medium.txt
+and:	result/euroc/V1_02_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.48499086 -0.2999066   0.82148639]
+ [-0.87365605  0.12443259 -0.4703633 ]
+ [ 0.03884538 -0.94581846 -0.32236388]]
+Translation of alignment:
+[0.55253979 2.06109157 0.93661754]
+Scale correction: 0.9998837409786613
+--------------------------------------------------------------------------------
+Compared 1671 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.032370
+      mean	0.012119
+    median	0.011573
+       min	0.000680
+      rmse	0.013375
+       sse	0.298930
+       std	0.005658
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_02_medium-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 1671 stamps and poses from: data/eurocgt/V1_02_medium.txt
+Loaded 1710 stamps and poses from: result/euroc/V1_02_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1671 of max. 1671 possible matching timestamps between...
+	data/eurocgt/V1_02_medium.txt
+and:	result/euroc/V1_02_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.48499086 -0.2999066   0.82148639]
+ [-0.87365605  0.12443259 -0.4703633 ]
+ [ 0.03884538 -0.94581846 -0.32236388]]
+Translation of alignment:
+[0.55260616 2.06120547 0.93654733]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1671 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.032174
+      mean	0.012124
+    median	0.011520
+       min	0.000565
+      rmse	0.013377
+       sse	0.299001
+       std	0.005651
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_02_medium-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 1671 stamps and poses from: data/eurocgt/V1_02_medium.txt
+Loaded 1710 stamps and poses from: result/euroc/V1_02_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1671 of max. 1671 possible matching timestamps between...
+	data/eurocgt/V1_02_medium.txt
+and:	result/euroc/V1_02_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 1671 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	7.063740
+      mean	3.565359
+    median	3.482935
+       min	0.829518
+      rmse	3.824329
+       sse	24439.194648
+       std	1.383368
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_02_medium-ape-na.pdf
+evo: V1_03_difficult--------------------------------------------------------------------------------
+Loaded 2094 stamps and poses from: data/eurocgt/V1_03_difficult.txt
+Loaded 2140 stamps and poses from: result/euroc/V1_03_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2089 of max. 2094 possible matching timestamps between...
+	data/eurocgt/V1_03_difficult.txt
+and:	result/euroc/V1_03_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.11535812 -0.37617308  0.91934015]
+ [-0.99205798 -0.0030817  -0.12574367]
+ [ 0.05013451 -0.92654429 -0.37283   ]]
+Translation of alignment:
+[0.9136286  2.10211562 0.92926035]
+Scale correction: 0.9951675674103697
+--------------------------------------------------------------------------------
+Compared 2089 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.336234
+      mean	0.020350
+    median	0.018748
+       min	0.002303
+      rmse	0.024673
+       sse	1.271647
+       std	0.013951
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_03_difficult-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2094 stamps and poses from: data/eurocgt/V1_03_difficult.txt
+Loaded 2140 stamps and poses from: result/euroc/V1_03_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2089 of max. 2094 possible matching timestamps between...
+	data/eurocgt/V1_03_difficult.txt
+and:	result/euroc/V1_03_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.11535812 -0.37617308  0.91934015]
+ [-0.99205798 -0.0030817  -0.12574367]
+ [ 0.05013451 -0.92654429 -0.37283   ]]
+Translation of alignment:
+[0.91800626 2.10742987 0.92578398]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2089 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.338757
+      mean	0.021269
+    median	0.019816
+       min	0.001447
+      rmse	0.025842
+       sse	1.395077
+       std	0.014678
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_03_difficult-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2094 stamps and poses from: data/eurocgt/V1_03_difficult.txt
+Loaded 2140 stamps and poses from: result/euroc/V1_03_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2089 of max. 2094 possible matching timestamps between...
+	data/eurocgt/V1_03_difficult.txt
+and:	result/euroc/V1_03_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2089 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	7.392999
+      mean	3.625772
+    median	3.438835
+       min	1.288732
+      rmse	3.834249
+       sse	30711.358992
+       std	1.247094
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V1_03_difficult-ape-na.pdf
+evo: V2_01_easy--------------------------------------------------------------------------------
+Loaded 2240 stamps and poses from: data/eurocgt/V2_01_easy.txt
+Loaded 2280 stamps and poses from: result/euroc/V2_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2240 of max. 2240 possible matching timestamps between...
+	data/eurocgt/V2_01_easy.txt
+and:	result/euroc/V2_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.00200279  0.25833614 -0.96605302]
+ [ 0.99994496 -0.00943209 -0.00459533]
+ [-0.01029904 -0.96600905 -0.25830303]]
+Translation of alignment:
+[-1.06906629  0.41155043  1.31403691]
+Scale correction: 0.9690882244644213
+--------------------------------------------------------------------------------
+Compared 2240 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.086276
+      mean	0.020898
+    median	0.018423
+       min	0.005160
+      rmse	0.025607
+       sse	1.468807
+       std	0.014799
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_01_easy-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2240 stamps and poses from: data/eurocgt/V2_01_easy.txt
+Loaded 2280 stamps and poses from: result/euroc/V2_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2240 of max. 2240 possible matching timestamps between...
+	data/eurocgt/V2_01_easy.txt
+and:	result/euroc/V2_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.00200279  0.25833614 -0.96605302]
+ [ 0.99994496 -0.00943209 -0.00459533]
+ [-0.01029904 -0.96600905 -0.25830303]]
+Translation of alignment:
+[-1.09248497  0.38838528  1.31111442]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2240 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.169393
+      mean	0.074415
+    median	0.069347
+       min	0.038494
+      rmse	0.078394
+       sse	13.766184
+       std	0.024658
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_01_easy-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2240 stamps and poses from: data/eurocgt/V2_01_easy.txt
+Loaded 2280 stamps and poses from: result/euroc/V2_01_easy-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2240 of max. 2240 possible matching timestamps between...
+	data/eurocgt/V2_01_easy.txt
+and:	result/euroc/V2_01_easy-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2240 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	7.102884
+      mean	3.851120
+    median	4.151965
+       min	1.061650
+      rmse	4.124093
+       sse	38098.237451
+       std	1.475471
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_01_easy-ape-na.pdf
+evo: V2_02_medium--------------------------------------------------------------------------------
+Loaded 2309 stamps and poses from: data/eurocgt/V2_02_medium.txt
+Loaded 2330 stamps and poses from: result/euroc/V2_02_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2297 of max. 2309 possible matching timestamps between...
+	data/eurocgt/V2_02_medium.txt
+and:	result/euroc/V2_02_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.05455016  0.28843515 -0.95594427]
+ [ 0.99845129  0.00528439 -0.05538134]
+ [-0.01092234 -0.95748485 -0.28827671]]
+Translation of alignment:
+[-0.99529854  0.40609197  1.29763018]
+Scale correction: 0.9585940523639789
+--------------------------------------------------------------------------------
+Compared 2297 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.369828
+      mean	0.010829
+    median	0.008741
+       min	0.001161
+      rmse	0.015130
+       sse	0.525836
+       std	0.010566
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_02_medium-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2309 stamps and poses from: data/eurocgt/V2_02_medium.txt
+Loaded 2330 stamps and poses from: result/euroc/V2_02_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2297 of max. 2309 possible matching timestamps between...
+	data/eurocgt/V2_02_medium.txt
+and:	result/euroc/V2_02_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.05455016  0.28843515 -0.95594427]
+ [ 0.99845129  0.00528439 -0.05538134]
+ [-0.01092234 -0.95748485 -0.28827671]]
+Translation of alignment:
+[-1.0023528   0.39164877  1.28124093]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2297 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.365118
+      mean	0.087269
+    median	0.086795
+       min	0.016636
+      rmse	0.092988
+       sse	19.861541
+       std	0.032107
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_02_medium-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2309 stamps and poses from: data/eurocgt/V2_02_medium.txt
+Loaded 2330 stamps and poses from: result/euroc/V2_02_medium-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2297 of max. 2309 possible matching timestamps between...
+	data/eurocgt/V2_02_medium.txt
+and:	result/euroc/V2_02_medium-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2297 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	7.152681
+      mean	3.715306
+    median	3.744941
+       min	1.278721
+      rmse	3.948705
+       sse	35815.447705
+       std	1.337450
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_02_medium-ape-na.pdf
+evo: V2_03_difficult--------------------------------------------------------------------------------
+Loaded 1890 stamps and poses from: data/eurocgt/V2_03_difficult.txt
+Loaded 1917 stamps and poses from: result/euroc/V2_03_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1885 of max. 1890 possible matching timestamps between...
+	data/eurocgt/V2_03_difficult.txt
+and:	result/euroc/V2_03_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.07249942  0.26083838 -0.96265631]
+ [ 0.99730281  0.00788518 -0.07297217]
+ [-0.01144322 -0.96535028 -0.26070652]]
+Translation of alignment:
+[-1.06393774  0.35523764  1.3080172 ]
+Scale correction: 0.9458726429286677
+--------------------------------------------------------------------------------
+Compared 1885 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.080354
+      mean	0.012088
+    median	0.011177
+       min	0.000695
+      rmse	0.014057
+       sse	0.372500
+       std	0.007176
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_03_difficult-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 1890 stamps and poses from: data/eurocgt/V2_03_difficult.txt
+Loaded 1917 stamps and poses from: result/euroc/V2_03_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1885 of max. 1890 possible matching timestamps between...
+	data/eurocgt/V2_03_difficult.txt
+and:	result/euroc/V2_03_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.07249942  0.26083838 -0.96265631]
+ [ 0.99730281  0.00788518 -0.07297217]
+ [-0.01144322 -0.96535028 -0.26070652]]
+Translation of alignment:
+[-1.08227149  0.36328133  1.27881072]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1885 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.219763
+      mean	0.102649
+    median	0.102543
+       min	0.007780
+      rmse	0.112976
+       sse	24.059218
+       std	0.047188
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_03_difficult-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 1890 stamps and poses from: data/eurocgt/V2_03_difficult.txt
+Loaded 1917 stamps and poses from: result/euroc/V2_03_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1885 of max. 1890 possible matching timestamps between...
+	data/eurocgt/V2_03_difficult.txt
+and:	result/euroc/V2_03_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 1885 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	7.533887
+      mean	3.443010
+    median	3.286745
+       min	1.073800
+      rmse	3.728790
+       sse	26208.807219
+       std	1.431629
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/V2_03_difficult-ape-na.pdf

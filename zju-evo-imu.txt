@@ -1,0 +1,1152 @@
+evo: A0--------------------------------------------------------------------------------
+Loaded 24578 stamps and poses from: data/zjugt/A0.txt
+Loaded 1742 stamps and poses from: result/zju/A0-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1742 of max. 1742 possible matching timestamps between...
+	data/zjugt/A0.txt
+and:	result/zju/A0-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.17861813  0.98351502  0.02817379]
+ [ 0.84457205  0.16794865 -0.50842039]
+ [-0.50477085 -0.0670183  -0.86064798]]
+Translation of alignment:
+[-0.42470566  2.13305612  1.22443295]
+Scale correction: 1.3764107023622756
+--------------------------------------------------------------------------------
+Compared 1742 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.125059
+      mean	0.054654
+    median	0.052011
+       min	0.002468
+      rmse	0.062899
+       sse	6.891745
+       std	0.031131
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A0-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 24578 stamps and poses from: data/zjugt/A0.txt
+Loaded 1742 stamps and poses from: result/zju/A0-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1742 of max. 1742 possible matching timestamps between...
+	data/zjugt/A0.txt
+and:	result/zju/A0-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.17861813  0.98351502  0.02817379]
+ [ 0.84457205  0.16794865 -0.50842039]
+ [-0.50477085 -0.0670183  -0.86064798]]
+Translation of alignment:
+[-0.42408257  1.87136338  1.23818324]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1742 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.657703
+      mean	0.280044
+    median	0.245796
+       min	0.017891
+      rmse	0.317746
+       sse	175.877021
+       std	0.150127
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A0-apese.pdf
+evo: A1--------------------------------------------------------------------------------
+Loaded 48189 stamps and poses from: data/zjugt/A1.txt
+Loaded 3555 stamps and poses from: result/zju/A1-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 3555 of max. 3555 possible matching timestamps between...
+	data/zjugt/A1.txt
+and:	result/zju/A1-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.17214329  0.98296524  0.06438963]
+ [ 0.41578113  0.13176071 -0.89986953]
+ [-0.89302449 -0.12813451 -0.43138012]]
+Translation of alignment:
+[ 1.86879057 -0.05746136  1.52715079]
+Scale correction: 1.1186448944489993
+--------------------------------------------------------------------------------
+Compared 3555 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.106404
+      mean	0.023120
+    median	0.016477
+       min	0.001095
+      rmse	0.030411
+       sse	3.287807
+       std	0.019757
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A1-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 48189 stamps and poses from: data/zjugt/A1.txt
+Loaded 3555 stamps and poses from: result/zju/A1-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 3555 of max. 3555 possible matching timestamps between...
+	data/zjugt/A1.txt
+and:	result/zju/A1-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.17214329  0.98296524  0.06438963]
+ [ 0.41578113  0.13176071 -0.89986953]
+ [-0.89302449 -0.12813451 -0.43138012]]
+Translation of alignment:
+[ 1.78885913 -0.06678402  1.53338466]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 3555 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.253661
+      mean	0.094047
+    median	0.081716
+       min	0.004665
+      rmse	0.106874
+       sse	40.605354
+       std	0.050767
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A1-apese.pdf
+evo: A2--------------------------------------------------------------------------------
+Loaded 30406 stamps and poses from: data/zjugt/A2.txt
+Loaded 2175 stamps and poses from: result/zju/A2-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2175 of max. 2175 possible matching timestamps between...
+	data/zjugt/A2.txt
+and:	result/zju/A2-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.14639716  0.98516979  0.08948942]
+ [ 0.75163957  0.16959337 -0.63739788]
+ [-0.64312194 -0.02604945 -0.76532058]]
+Translation of alignment:
+[-0.55027495  2.15554295  1.29904871]
+Scale correction: 1.3033892621472263
+--------------------------------------------------------------------------------
+Compared 2175 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.107593
+      mean	0.029793
+    median	0.023550
+       min	0.001444
+      rmse	0.036952
+       sse	2.969910
+       std	0.021860
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A2-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 30406 stamps and poses from: data/zjugt/A2.txt
+Loaded 2175 stamps and poses from: result/zju/A2-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2175 of max. 2175 possible matching timestamps between...
+	data/zjugt/A2.txt
+and:	result/zju/A2-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.14639716  0.98516979  0.08948942]
+ [ 0.75163957  0.16959337 -0.63739788]
+ [-0.64312194 -0.02604945 -0.76532058]]
+Translation of alignment:
+[-0.47970979  1.92363047  1.29876277]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2175 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.580500
+      mean	0.245041
+    median	0.212384
+       min	0.032252
+      rmse	0.274629
+       sse	164.040587
+       std	0.124000
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A2-apese.pdf
+evo: A3--------------------------------------------------------------------------------
+Loaded 18437 stamps and poses from: data/zjugt/A3.txt
+Loaded 1335 stamps and poses from: result/zju/A3-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1335 of max. 1335 possible matching timestamps between...
+	data/zjugt/A3.txt
+and:	result/zju/A3-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.95256182  0.28378131 -0.10997336]
+ [ 0.301138    0.82652019 -0.47558415]
+ [-0.04406669 -0.48614046 -0.87276892]]
+Translation of alignment:
+[0.93602999 0.04208648 0.56647985]
+Scale correction: 0.8203780515316689
+--------------------------------------------------------------------------------
+Compared 1335 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.034827
+      mean	0.011313
+    median	0.010955
+       min	0.000841
+      rmse	0.012606
+       sse	0.212148
+       std	0.005561
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A3-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 18437 stamps and poses from: data/zjugt/A3.txt
+Loaded 1335 stamps and poses from: result/zju/A3-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1335 of max. 1335 possible matching timestamps between...
+	data/zjugt/A3.txt
+and:	result/zju/A3-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.95256182  0.28378131 -0.10997336]
+ [ 0.301138    0.82652019 -0.47558415]
+ [-0.04406669 -0.48614046 -0.87276892]]
+Translation of alignment:
+[0.94345414 0.02649201 0.57767787]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1335 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.155186
+      mean	0.056024
+    median	0.047128
+       min	0.008064
+      rmse	0.065339
+       sse	5.699362
+       std	0.033622
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A3-apese.pdf
+evo: A4--------------------------------------------------------------------------------
+Loaded 39539 stamps and poses from: data/zjugt/A4.txt
+Loaded 2895 stamps and poses from: result/zju/A4-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2895 of max. 2895 possible matching timestamps between...
+	data/zjugt/A4.txt
+and:	result/zju/A4-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.51335983  0.81899757  0.25632921]
+ [ 0.67800728  0.5701766  -0.46390169]
+ [-0.52608727 -0.06435542 -0.84799208]]
+Translation of alignment:
+[0.42352301 0.72557159 1.30757486]
+Scale correction: 1.1315837077031359
+--------------------------------------------------------------------------------
+Compared 2895 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.034408
+      mean	0.008098
+    median	0.007166
+       min	0.000554
+      rmse	0.009724
+       sse	0.273757
+       std	0.005384
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A4-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 39539 stamps and poses from: data/zjugt/A4.txt
+Loaded 2895 stamps and poses from: result/zju/A4-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2895 of max. 2895 possible matching timestamps between...
+	data/zjugt/A4.txt
+and:	result/zju/A4-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.51335983  0.81899757  0.25632921]
+ [ 0.67800728  0.5701766  -0.46390169]
+ [-0.52608727 -0.06435542 -0.84799208]]
+Translation of alignment:
+[0.4716367  0.66899038 1.32435189]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2895 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.172640
+      mean	0.086483
+    median	0.080909
+       min	0.002838
+      rmse	0.092768
+       sse	24.913962
+       std	0.033565
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A4-apese.pdf
+evo: A5--------------------------------------------------------------------------------
+Loaded 30838 stamps and poses from: data/zjugt/A5.txt
+Loaded 2275 stamps and poses from: result/zju/A5-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2275 of max. 2275 possible matching timestamps between...
+	data/zjugt/A5.txt
+and:	result/zju/A5-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.52933719  0.83148526  0.16862503]
+ [ 0.78341881  0.5553276  -0.27904521]
+ [-0.32566411 -0.01560499 -0.94535674]]
+Translation of alignment:
+[0.38137481 0.53024659 0.41475419]
+Scale correction: 0.8626932399916042
+--------------------------------------------------------------------------------
+Compared 2275 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.066785
+      mean	0.014479
+    median	0.013296
+       min	0.000671
+      rmse	0.016610
+       sse	0.627644
+       std	0.008138
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A5-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 30838 stamps and poses from: data/zjugt/A5.txt
+Loaded 2275 stamps and poses from: result/zju/A5-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2275 of max. 2275 possible matching timestamps between...
+	data/zjugt/A5.txt
+and:	result/zju/A5-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.52933719  0.83148526  0.16862503]
+ [ 0.78341881  0.5553276  -0.27904521]
+ [-0.32566411 -0.01560499 -0.94535674]]
+Translation of alignment:
+[0.45560921 0.56679095 0.38657501]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2275 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.212349
+      mean	0.098748
+    median	0.095190
+       min	0.008944
+      rmse	0.103759
+       sse	24.492568
+       std	0.031857
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A5-apese.pdf
+evo: A6--------------------------------------------------------------------------------
+Loaded 29157 stamps and poses from: data/zjugt/A6.txt
+Loaded 2143 stamps and poses from: result/zju/A6-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2143 of max. 2143 possible matching timestamps between...
+	data/zjugt/A6.txt
+and:	result/zju/A6-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.04961915  0.90784248 -0.41636518]
+ [ 0.99054363  0.00865866  0.13692459]
+ [ 0.12791113 -0.41922196 -0.89882795]]
+Translation of alignment:
+[0.83398451 0.25408851 0.49359703]
+Scale correction: 0.8441390973773742
+--------------------------------------------------------------------------------
+Compared 2143 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.025647
+      mean	0.005592
+    median	0.004630
+       min	0.000301
+      rmse	0.006937
+       sse	0.103135
+       std	0.004105
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A6-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 29157 stamps and poses from: data/zjugt/A6.txt
+Loaded 2143 stamps and poses from: result/zju/A6-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2143 of max. 2143 possible matching timestamps between...
+	data/zjugt/A6.txt
+and:	result/zju/A6-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.04961915  0.90784248 -0.41636518]
+ [ 0.99054363  0.00865866  0.13692459]
+ [ 0.12791113 -0.41922196 -0.89882795]]
+Translation of alignment:
+[0.87002831 0.25115734 0.48697927]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2143 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.168354
+      mean	0.060389
+    median	0.043490
+       min	0.002696
+      rmse	0.071907
+       sse	11.080650
+       std	0.039036
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A6-apese.pdf
+evo: A7--------------------------------------------------------------------------------
+Loaded 30159 stamps and poses from: data/zjugt/A7.txt
+Loaded 2194 stamps and poses from: result/zju/A7-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2194 of max. 2194 possible matching timestamps between...
+	data/zjugt/A7.txt
+and:	result/zju/A7-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.98544461  0.16361475 -0.0461425 ]
+ [ 0.16603538  0.86809172 -0.46781302]
+ [-0.03648519 -0.46866511 -0.88262214]]
+Translation of alignment:
+[-0.43007437  0.35698995  0.88966496]
+Scale correction: 1.0653652595261214
+--------------------------------------------------------------------------------
+Compared 2194 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.029188
+      mean	0.004187
+    median	0.003645
+       min	0.000263
+      rmse	0.004907
+       sse	0.052819
+       std	0.002557
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A7-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 30159 stamps and poses from: data/zjugt/A7.txt
+Loaded 2194 stamps and poses from: result/zju/A7-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2194 of max. 2194 possible matching timestamps between...
+	data/zjugt/A7.txt
+and:	result/zju/A7-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.98544461  0.16361475 -0.0461425 ]
+ [ 0.16603538  0.86809172 -0.46781302]
+ [-0.03648519 -0.46866511 -0.88262214]]
+Translation of alignment:
+[-0.43010385  0.3470451   0.88615062]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2194 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.056770
+      mean	0.018623
+    median	0.014629
+       min	0.001697
+      rmse	0.021196
+       sse	0.985667
+       std	0.010121
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/A7-apese.pdf
+evo: B0--------------------------------------------------------------------------------
+Loaded 16906 stamps and poses from: data/zjugt/B0.txt
+Loaded 1188 stamps and poses from: result/zju/B0-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1188 of max. 1188 possible matching timestamps between...
+	data/zjugt/B0.txt
+and:	result/zju/B0-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.10101486  0.99258027 -0.06767865]
+ [ 0.83860473  0.04834847 -0.54259058]
+ [-0.53529255 -0.11156535 -0.83726642]]
+Translation of alignment:
+[0.70651161 0.88259096 1.33393927]
+Scale correction: 1.2374483768344093
+--------------------------------------------------------------------------------
+Compared 1188 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.236872
+      mean	0.008029
+    median	0.003819
+       min	0.000424
+      rmse	0.019671
+       sse	0.459697
+       std	0.017958
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B0-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 16906 stamps and poses from: data/zjugt/B0.txt
+Loaded 1188 stamps and poses from: result/zju/B0-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1188 of max. 1188 possible matching timestamps between...
+	data/zjugt/B0.txt
+and:	result/zju/B0-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.10101486  0.99258027 -0.06767865]
+ [ 0.83860473  0.04834847 -0.54259058]
+ [-0.53529255 -0.11156535 -0.83726642]]
+Translation of alignment:
+[0.68396881 0.7813219  1.33502669]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1188 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.315364
+      mean	0.146654
+    median	0.148027
+       min	0.081674
+      rmse	0.148352
+       sse	26.145998
+       std	0.022383
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B0-apese.pdf
+evo: B1--------------------------------------------------------------------------------
+Loaded 23417 stamps and poses from: data/zjugt/B1.txt
+Loaded 1705 stamps and poses from: result/zju/B1-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1705 of max. 1705 possible matching timestamps between...
+	data/zjugt/B1.txt
+and:	result/zju/B1-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.23900283  0.96980097  0.04861811]
+ [ 0.84801308  0.23285565 -0.47607989]
+ [-0.47302374 -0.07255565 -0.87805707]]
+Translation of alignment:
+[0.57951517 0.77061315 1.31136766]
+Scale correction: 1.0564081684836928
+--------------------------------------------------------------------------------
+Compared 1705 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.070669
+      mean	0.007395
+    median	0.005777
+       min	0.000431
+      rmse	0.009494
+       sse	0.153697
+       std	0.005955
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B1-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 23417 stamps and poses from: data/zjugt/B1.txt
+Loaded 1705 stamps and poses from: result/zju/B1-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1705 of max. 1705 possible matching timestamps between...
+	data/zjugt/B1.txt
+and:	result/zju/B1-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.23900283  0.96980097  0.04861811]
+ [ 0.84801308  0.23285565 -0.47607989]
+ [-0.47302374 -0.07255565 -0.87805707]]
+Translation of alignment:
+[0.58285306 0.74326586 1.31511735]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1705 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.062879
+      mean	0.038386
+    median	0.039537
+       min	0.006964
+      rmse	0.039886
+       sse	2.712441
+       std	0.010836
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B1-apese.pdf
+evo: B2--------------------------------------------------------------------------------
+Loaded 25892 stamps and poses from: data/zjugt/B2.txt
+Loaded 1897 stamps and poses from: result/zju/B2-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1897 of max. 1897 possible matching timestamps between...
+	data/zjugt/B2.txt
+and:	result/zju/B2-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.32726992  0.82901028 -0.45347145]
+ [ 0.74215293 -0.07154269 -0.66640128]
+ [-0.58489608 -0.55463826 -0.59183864]]
+Translation of alignment:
+[ 0.57606763 -0.01977186  1.34980401]
+Scale correction: 0.015002806379444988
+--------------------------------------------------------------------------------
+Compared 1897 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	1.055770
+      mean	0.699064
+    median	0.696866
+       min	0.322312
+      rmse	0.711859
+       sse	961.292971
+       std	0.134363
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B2-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 25892 stamps and poses from: data/zjugt/B2.txt
+Loaded 1897 stamps and poses from: result/zju/B2-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1897 of max. 1897 possible matching timestamps between...
+	data/zjugt/B2.txt
+and:	result/zju/B2-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.32726992  0.82901028 -0.45347145]
+ [ 0.74215293 -0.07154269 -0.66640128]
+ [-0.58489608 -0.55463826 -0.59183864]]
+Translation of alignment:
+[ -2.42882905 -17.10923116   2.40270248]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1897 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	23.056020
+      mean	7.743938
+    median	5.355111
+       min	0.666677
+      rmse	9.411736
+       sse	168037.712339
+       std	5.349037
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B2-apese.pdf
+evo: B3--------------------------------------------------------------------------------
+Loaded 20072 stamps and poses from: data/zjugt/B3.txt
+Loaded 1426 stamps and poses from: result/zju/B3-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1426 of max. 1426 possible matching timestamps between...
+	data/zjugt/B3.txt
+and:	result/zju/B3-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.21524965  0.86506641 -0.453131  ]
+ [ 0.78433957 -0.4295784  -0.44751965]
+ [-0.58178951 -0.25908013 -0.77097241]]
+Translation of alignment:
+[1.26634322 1.03300597 1.41765768]
+Scale correction: 0.3028029119331087
+--------------------------------------------------------------------------------
+Compared 1426 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	1.433188
+      mean	0.487004
+    median	0.314231
+       min	0.150791
+      rmse	0.612308
+       sse	534.637573
+       std	0.371144
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B3-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 20072 stamps and poses from: data/zjugt/B3.txt
+Loaded 1426 stamps and poses from: result/zju/B3-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1426 of max. 1426 possible matching timestamps between...
+	data/zjugt/B3.txt
+and:	result/zju/B3-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.21524965  0.86506641 -0.453131  ]
+ [ 0.78433957 -0.4295784  -0.44751965]
+ [-0.58178951 -0.25908013 -0.77097241]]
+Translation of alignment:
+[2.81685517 2.68093411 1.34795103]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1426 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	2.878735
+      mean	1.703019
+    median	1.756761
+       min	0.430420
+      rmse	1.769795
+       sse	4466.481913
+       std	0.481562
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B3-apese.pdf
+evo: B4--------------------------------------------------------------------------------
+Loaded 19809 stamps and poses from: data/zjugt/B4.txt
+Loaded 1368 stamps and poses from: result/zju/B4-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1368 of max. 1368 possible matching timestamps between...
+	data/zjugt/B4.txt
+and:	result/zju/B4-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.74583158  0.028221   -0.6655365 ]
+ [-0.60143782 -0.45804079  0.6545771 ]
+ [-0.28637005  0.88848309  0.35859446]]
+Translation of alignment:
+[0.55659453 0.30670799 1.31703563]
+Scale correction: 0.00396972135759084
+--------------------------------------------------------------------------------
+Compared 1368 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	1.209853
+      mean	0.923399
+    median	0.966740
+       min	0.473882
+      rmse	0.933039
+       sse	1190.927632
+       std	0.133771
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B4-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 19809 stamps and poses from: data/zjugt/B4.txt
+Loaded 1368 stamps and poses from: result/zju/B4-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1368 of max. 1368 possible matching timestamps between...
+	data/zjugt/B4.txt
+and:	result/zju/B4-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.74583158  0.028221   -0.6655365 ]
+ [-0.60143782 -0.45804079  0.6545771 ]
+ [-0.28637005  0.88848309  0.35859446]]
+Translation of alignment:
+[-21.51677591   8.24968386  -2.41741431]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1368 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	175.817424
+      mean	41.224479
+    median	25.078720
+       min	21.523899
+      rmse	55.859512
+       sse	4268549.961321
+       std	37.693864
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B4-apese.pdf
+evo: B5--------------------------------------------------------------------------------
+Loaded 30083 stamps and poses from: data/zjugt/B5.txt
+Loaded 2144 stamps and poses from: result/zju/B5-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2144 of max. 2144 possible matching timestamps between...
+	data/zjugt/B5.txt
+and:	result/zju/B5-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.66135676  0.36244283  0.65669051]
+ [ 0.30773826  0.92953949 -0.20310959]
+ [-0.68403537  0.06776089 -0.72629475]]
+Translation of alignment:
+[-0.42861565  0.22980899  0.79391361]
+Scale correction: 0.5894745261394128
+--------------------------------------------------------------------------------
+Compared 2144 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	9.466245
+      mean	0.481344
+    median	0.460684
+       min	0.307833
+      rmse	0.597847
+       sse	766.309740
+       std	0.354582
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B5-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 30083 stamps and poses from: data/zjugt/B5.txt
+Loaded 2144 stamps and poses from: result/zju/B5-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2144 of max. 2144 possible matching timestamps between...
+	data/zjugt/B5.txt
+and:	result/zju/B5-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.66135676  0.36244283  0.65669051]
+ [ 0.30773826  0.92953949 -0.20310959]
+ [-0.68403537  0.06776089 -0.72629475]]
+Translation of alignment:
+[-0.59224649  0.33785476  0.79552089]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2144 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	16.552665
+      mean	0.268818
+    median	0.224242
+       min	0.097828
+      rmse	0.706399
+       sse	1069.855568
+       std	0.653251
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B5-apese.pdf
+evo: B6--------------------------------------------------------------------------------
+Loaded 30846 stamps and poses from: data/zjugt/B6.txt
+Loaded 2134 stamps and poses from: result/zju/B6-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2134 of max. 2134 possible matching timestamps between...
+	data/zjugt/B6.txt
+and:	result/zju/B6-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.45485244  0.8862207   0.08787559]
+ [ 0.41708071 -0.12479878 -0.90026049]
+ [-0.78686272  0.4461369  -0.42639059]]
+Translation of alignment:
+[0.18271146 0.52272448 0.96664904]
+Scale correction: 0.2508931921622542
+--------------------------------------------------------------------------------
+Compared 2134 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	1.200563
+      mean	0.693222
+    median	0.656990
+       min	0.112625
+      rmse	0.737551
+       sse	1160.855067
+       std	0.251842
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B6-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 30846 stamps and poses from: data/zjugt/B6.txt
+Loaded 2134 stamps and poses from: result/zju/B6-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2134 of max. 2134 possible matching timestamps between...
+	data/zjugt/B6.txt
+and:	result/zju/B6-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.45485244  0.8862207   0.08787559]
+ [ 0.41708071 -0.12479878 -0.90026049]
+ [-0.78686272  0.4461369  -0.42639059]]
+Translation of alignment:
+[1.02433814 1.52118367 1.40853712]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2134 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	2.802088
+      mean	1.273460
+    median	1.096416
+       min	0.307066
+      rmse	1.416333
+       sse	4280.799782
+       std	0.619917
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B6-apese.pdf
+evo: B7--------------------------------------------------------------------------------
+Loaded 26230 stamps and poses from: data/zjugt/B7.txt
+Loaded 1880 stamps and poses from: result/zju/B7-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1880 of max. 1880 possible matching timestamps between...
+	data/zjugt/B7.txt
+and:	result/zju/B7-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[-0.58129075 -0.21078547  0.78592019]
+ [-0.1290932   0.97752171  0.1666921 ]
+ [-0.80339032 -0.00456038 -0.5954353 ]]
+Translation of alignment:
+[-0.53159923 -0.04808449  0.74825458]
+Scale correction: 0.595340569521082
+--------------------------------------------------------------------------------
+Compared 1880 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	1.359060
+      mean	0.704891
+    median	0.580406
+       min	0.339436
+      rmse	0.747489
+       sse	1050.429984
+       std	0.248732
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B7-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 26230 stamps and poses from: data/zjugt/B7.txt
+Loaded 1880 stamps and poses from: result/zju/B7-simu.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1880 of max. 1880 possible matching timestamps between...
+	data/zjugt/B7.txt
+and:	result/zju/B7-simu.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.58129075 -0.21078547  0.78592019]
+ [-0.1290932   0.97752171  0.1666921 ]
+ [-0.80339032 -0.00456038 -0.5954353 ]]
+Translation of alignment:
+[-0.73184092 -0.10180873  0.73189513]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1880 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	1.588403
+      mean	0.688904
+    median	0.467892
+       min	0.201485
+      rmse	0.784573
+       sse	1157.241636
+       std	0.375454
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/B7-apese.pdf

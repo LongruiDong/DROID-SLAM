@@ -1,0 +1,99 @@
+evo: MH_04_difficult--------------------------------------------------------------------------------
+Loaded 2023 stamps and poses from: data/camgt/MH_04_difficult.txt
+Loaded 2023 stamps and poses from: result/euroc/MH_04_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2023 of max. 2023 possible matching timestamps between...
+	data/camgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.9997338   0.00739552 -0.02185509]
+ [-0.00754948  0.99994721 -0.0069702 ]
+ [ 0.02180239  0.00713334  0.99973685]]
+Translation of alignment:
+[-0.01999116  0.00558714 -0.00379939]
+Scale correction: 1.0380081499226377
+--------------------------------------------------------------------------------
+Compared 2023 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.225387
+      mean	0.050112
+    median	0.039479
+       min	0.009976
+      rmse	0.057832
+       sse	6.765915
+       std	0.028867
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 2023 stamps and poses from: data/camgt/MH_04_difficult.txt
+Loaded 2023 stamps and poses from: result/euroc/MH_04_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2023 of max. 2023 possible matching timestamps between...
+	data/camgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.9997338   0.00739552 -0.02185509]
+ [-0.00754948  0.99994721 -0.0069702 ]
+ [ 0.02180239  0.00713334  0.99973685]]
+Translation of alignment:
+[-0.05414178 -0.08529667  0.0959228 ]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 2023 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.439129
+      mean	0.227938
+    median	0.189214
+       min	0.036505
+      rmse	0.254503
+       sse	131.033576
+       std	0.113208
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 2023 stamps and poses from: data/camgt/MH_04_difficult.txt
+Loaded 2023 stamps and poses from: result/euroc/MH_04_difficult-s.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 2023 of max. 2023 possible matching timestamps between...
+	data/camgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-s.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 2023 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	0.613425
+      mean	0.269452
+    median	0.289931
+       min	0.000032
+      rmse	0.344498
+       sse	240.087610
+       std	0.214650
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-ape-na.pdf

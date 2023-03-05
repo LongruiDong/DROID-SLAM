@@ -1,0 +1,99 @@
+evo: MH_04_difficult--------------------------------------------------------------------------------
+Loaded 19753 stamps and poses from: data/rawgt/MH_04_difficult.txt
+Loaded 2023 stamps and poses from: result/euroc/MH_04_difficult-srectimu1.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1973 of max. 2023 possible matching timestamps between...
+	data/rawgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-srectimu1.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method... (with scale correction)
+Rotation of alignment:
+[[ 0.26982925  0.78515838  0.5574213 ]
+ [ 0.31175419 -0.61894748  0.72091146]
+ [ 0.91104418 -0.02074457 -0.41178655]]
+Translation of alignment:
+[ 4.65808971 -1.73969285  0.5631441 ]
+Scale correction: 1.0379533861442183
+--------------------------------------------------------------------------------
+Compared 1973 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with Sim(3) Umeyama alignment)
+
+       max	0.227384
+      mean	0.049141
+    median	0.039446
+       min	0.008781
+      rmse	0.056319
+       sse	6.257917
+       std	0.027512
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-apesim.pdf
+--------------------------------------------------------------------------------
+Loaded 19753 stamps and poses from: data/rawgt/MH_04_difficult.txt
+Loaded 2023 stamps and poses from: result/euroc/MH_04_difficult-srectimu1.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1973 of max. 2023 possible matching timestamps between...
+	data/rawgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-srectimu1.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.26982925  0.78515838  0.5574213 ]
+ [ 0.31175419 -0.61894748  0.72091146]
+ [ 0.91104418 -0.02074457 -0.41178655]]
+Translation of alignment:
+[ 4.71523472 -1.6166293   0.60630374]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 1973 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.439758
+      mean	0.229945
+    median	0.189485
+       min	0.040081
+      rmse	0.255796
+       sse	129.096776
+       std	0.112058
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-apese.pdf
+--------------------------------------------------------------------------------
+Loaded 19753 stamps and poses from: data/rawgt/MH_04_difficult.txt
+Loaded 2023 stamps and poses from: result/euroc/MH_04_difficult-srectimu1.csv
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1973 of max. 2023 possible matching timestamps between...
+	data/rawgt/MH_04_difficult.txt
+and:	result/euroc/MH_04_difficult-srectimu1.csv
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Compared 1973 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(not aligned)
+
+       max	22.712172
+      mean	10.507848
+    median	8.310506
+       min	3.761323
+      rmse	12.088430
+       sse	288314.766390
+       std	5.976225
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to evoplot/MH_04_difficult-ape-na.pdf
